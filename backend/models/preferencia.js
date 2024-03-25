@@ -17,10 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     idUsuario: DataTypes.INTEGER,
     deporte: DataTypes.INTEGER,
     arte: DataTypes.INTEGER,
-    politico: DataTypes.INTEGER,
-    idTipo: DataTypes.INTEGER,
-    idInteres: DataTypes.INTEGER,
-    idNinos: DataTypes.INTEGER
+    politico: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'preferencia',
