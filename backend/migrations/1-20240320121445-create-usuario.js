@@ -15,9 +15,6 @@ module.exports = {
       correo: {
         type: Sequelize.STRING
       },
-      idEstado: {
-        type: Sequelize.INTEGER
-      },
       fechaNacimiento: {
         type: Sequelize.DATE
       },
