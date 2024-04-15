@@ -1,25 +1,14 @@
 'use strict';
+const {ninoFactory} = required('../factories/ninoFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const nino = await ninoFactory(4);
+    await queryInterface.bulkInsert('nino', nino, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('nino', null, {});
   }
 };

@@ -1,25 +1,14 @@
 'use strict';
+const {chatFactory} = required('../factories/chatFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const chat = await chatFactory(2);
+    await queryInterface.bulkInsert('chat', chat, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('chat', null, {});
   }
 };

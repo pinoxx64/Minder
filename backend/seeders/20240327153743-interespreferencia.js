@@ -1,25 +1,14 @@
 'use strict';
+const {interesPreferenciaFactory} = required('../factories/interesPreferenciaFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const interesPreferencia = await interesPreferenciaFactory(20);
+    await queryInterface.bulkInsert('interesPreferencia', interesPreferencia, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('interesPreferencia', null, {});
   }
 };
