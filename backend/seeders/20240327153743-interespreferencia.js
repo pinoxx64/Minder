@@ -1,5 +1,5 @@
 'use strict';
-const {interesPreferenciaFactory} = required('../factories/interesPreferenciaFactory')
+const {interesPreferenciaFactory} = require('../factories/interesPreferenciaFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

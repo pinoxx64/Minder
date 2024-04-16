@@ -27,7 +27,10 @@ const preferenciaFactory = async (ctos=20) => {
     for(let i = 0; i < ctos; i++) {
         let preferencia = 
             {
-            nombre: lista[i].nombre,
+            idUsuario: lista[i].idUsuario,
+            deporte: lista[i].deporte,
+            arte: lista[i].arte,
+            politico: lista[i].politico,
             createdAt: new Date(),
             updatedAt: new Date()
         }

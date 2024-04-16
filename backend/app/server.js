@@ -7,14 +7,14 @@ class Server {
         this.app = express();
         this.serverExpress = require('http').createServer(this.app);
         this.serverWebSocket = require('http').createServer(this.app);
-        this.io = require('socket.io')(this.serverWebSocket, {
+        /*this.io = require('socket.io')(this.serverWebSocket, {
             cors: {
                 origin:'*',
                 methods: ["*"],
                 allowedHeaders: [""],
                 credentials: true
             }
-        });
+        });*/
 
         this.chat = '/api/chat'
         this.evento = '/api/evento'

@@ -1,14 +1,14 @@
 'use strict';
-const {usuarioEventoFactory} = required('../factories/usuarioEventoFactory')
+const {usuarioEventoFactory} = require('../factories/usuarioEventoFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     const usuarioEvento = await usuarioEventoFactory(4);
-    await queryInterface.bulkInsert('usuarioEvento', usuarioEvento, {});
+    await queryInterface.bulkInsert('usuarioEventos', usuarioEvento, {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('usuarioEvento', null, {});
+    await queryInterface.bulkDelete('usuarioEventos', null, {});
   }
 };

@@ -1,14 +1,14 @@
 'use strict';
-const {mensajeChatFactory} = required('../factories/mensajeChatFactory')
+const {mensajeChatFactory} = require('../factories/mensajeChatFactory')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     const mensajeChat = await mensajeChatFactory(2);
-    await queryInterface.bulkInsert('mensajeChat', mensajeChat, {});
+    await queryInterface.bulkInsert('mensajeChats', mensajeChat, {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('mensajeChat', null, {});
+    await queryInterface.bulkDelete('mensajeChats', null, {});
   }
 };
