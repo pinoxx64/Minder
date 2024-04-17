@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class evento extends Model {
+  class Evento extends Model {
     static associate(models) {
       this.hasMany(models.usuarioevento, {
         foreignKey: 'idEvento',
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  evento.init({
+  Evento.init({
     nombre: DataTypes.STRING,
     fecha: DataTypes.DATE,
     descrip: DataTypes.STRING,
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     longitud: DataTypes.FLOAT
   }, {
     sequelize,
-    modelName: 'evento',
+    modelName: 'Evento',
   });
-  return evento;
+  return Evento;
 };

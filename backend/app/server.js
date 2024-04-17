@@ -63,17 +63,17 @@ class Server {
         this.app.use(this.usuarioEvento, require('../routes/usuarioEventoRutas'))
         this.app.use(this.usuarioRol, require('../routes/usuarioRolRutas'))
     }
-    sockets() {
+    /*sockets() {
 
-    }
+    }*/
 
 
     listen() {
         this.serverExpress.listen(process.env.PORT, () => {
         });
 
-        this.serverWebSocket.listen(process.env.WEBSOCKETPORT, () => {
-        });
+        /*this.serverWebSocket.listen(process.env.WEBSOCKETPORT, () => {
+        });*/
     }
 }
 

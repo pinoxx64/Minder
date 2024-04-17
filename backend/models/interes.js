@@ -3,19 +3,19 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class interes extends Model {
+  class Interes extends Model {
     static associate(models) {
       this.hasMany(models.usuario, {
         foreignKey: 'id',
-        as: 'interes',
+        as: 'Interes',
       });
     }
   }
-  interes.init({
+  Interes.init({
     nombre: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'interes',
+    modelName: 'Interes',
   });
-  return interes;
+  return Interes;
 };

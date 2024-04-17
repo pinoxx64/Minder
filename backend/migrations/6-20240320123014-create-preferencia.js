@@ -21,15 +21,6 @@ module.exports = {
       politico: {
         type: Sequelize.INTEGER
       },
-      idTipo: {
-        type: Sequelize.INTEGER
-      },
-      idInteres: {
-        type: Sequelize.INTEGER
-      },
-      idNinos: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

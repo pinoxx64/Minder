@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class chat extends Model {
+  class Chat extends Model {
     static associate(models) {
       this.belongsTo(models.usuario, {
         foreignKey: 'idUsuario',
@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  chat.init({
+  Chat.init({
     idUsuario1: DataTypes.INTEGER,
     idUsuario2: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'chat',
+    tableName: 'chats'
   });
-  return chat;
+  return Chat;
 };

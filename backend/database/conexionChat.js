@@ -1,12 +1,6 @@
 require('dotenv').config()
-const bcrypt = require('bcrypt');
-const {
-    Sequelize,
-    sequelize,
-    Op,
-    where
-} = require('sequelize');
-const models = require('../models/index.js');
+const {Sequelize} = require('sequelize');
+const models = require('../models/index');
 
 class ConexionChat{
     constructor() {
@@ -37,7 +31,7 @@ class ConexionChat{
         try{
             let resultado = [];
             this.conectar();
-            resultado = await models.chat.findByPk(id);
+            resultado = await models.Chat.findByPk(id);
             if (!resultado) {
                 throw new Error('error');
             }
@@ -54,7 +48,7 @@ class ConexionChat{
         let resultado;
         this.conectar();
         try {
-            const chatNuevo = new models.chat(body);
+            const chatNuevo = new models.Chat(body);
             await chatNuevo.save();
             resultado = chatNuevo.id; 
             return resultado
@@ -73,7 +67,7 @@ class ConexionChat{
     deleteChat = async (id) => {
         try{
             this.conectar();
-            let resultado = await models.chat.findByPk(id);
+            let resultado = await models.Chat.findByPk(id);
             if (!resultado) {
                 throw error;
             }
