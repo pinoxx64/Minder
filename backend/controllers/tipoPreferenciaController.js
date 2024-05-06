@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionTipoPreferencia');
+const Conexion = require('../database/ConexionTipopreferencia')
 
-const tipoPreferenciaGet =  (req, res = response) => {
+const tipopreferenciaGet =  (req, res = response) => {
     const conx = new Conexion();
-    conx.getTipoPreferencia(req.params.id)    
+    
+    conx.getTipopreferencia(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
-const tipoPreferenciaPost =  (req = request, res = response) => {
+const tipopreferenciaPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postTipoPreferencia(req.body)    
+        
+    conx.registrarTipopreferencia(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const tipoPreferenciaDelete =  (req, res) => {
+const tipopreferenciaDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteTipoPreferencia(req.params.id)    
+    
+    conx.borrarTipopreferencia(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
-const tipoPreferenciaPut =  (req, res = response) => {
+const tipopreferenciaPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putTipoPreferencia(req.params.id, req.body)    
+    
+    conx.modificarTipopreferencia(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
-
 
 module.exports = {
-    tipoPreferenciaDelete,
-    tipoPreferenciaPost,
-    tipoPreferenciaPut,
-    tipoPreferenciaGet
+    tipopreferenciaDelete,
+    tipopreferenciaPost,
+    tipopreferenciaPut,
+    tipopreferenciaGet,
 }

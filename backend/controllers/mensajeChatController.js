@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionMensajeChat');
+const Conexion = require('../database/ConexionMensajechat')
 
-const mensajeChatGet =  (req, res = response) => {
+const mensajechatGet =  (req, res = response) => {
     const conx = new Conexion();
-    conx.getMensajeChat(req.params.id)    
+    
+    conx.getMensajechat(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
-const mensajeChatPost =  (req = request, res = response) => {
+const mensajechatPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postMensajeChat(req.body)    
+        
+    conx.registrarMensajechat(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const mensajeChatDelete =  (req, res) => {
+const mensajechatDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteMensajeChat(req.params.id)    
+    
+    conx.borrarMensajechat(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
 const mensajeChatPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putMensajeChat(req.params.id, req.body)    
+    
+    conx.modificarMensajechat(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
 
-
 module.exports = {
-    mensajeChatDelete,
-    mensajeChatPost,
+    mensajechatDelete,
+    mensajechatPost,
     mensajeChatPut,
-    mensajeChatGet
+    mensajechatGet,
 }

@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionUsuarioEvento');
+const Conexion = require('../database/ConexionUsuarioevento')
 
-const usuarioEventoGet =  (req, res = response) => {
+const usuarioeventoGet =  (req, res = response) => {
     const conx = new Conexion();
+    
     conx.getUsuarioEvento(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
-const usuariosEventoPost =  (req = request, res = response) => {
+const usuarioeventoPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postUsuarioEvento(req.body)    
+        
+    conx.registrarUsuarioEvento(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const usuariosEventoDelete =  (req, res) => {
+const usuarioeventoDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteUsuarioEvento(req.params.id)    
+    
+    conx.borrarUsuarioEvento(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
-const usuariosEventoPut =  (req, res = response) => {
+const usuarioeventoPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putUsuarioEvento(req.params.id, req.body)    
+    
+    conx.modificarUsuarioEvento(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
-
 
 module.exports = {
-    usuariosEventoDelete,
-    usuariosEventoPost,
-    usuariosEventoPut,
-    usuarioEventoGet
+    usuarioeventoDelete,
+    usuarioeventoPost,
+    usuarioeventoPut,
+    usuarioeventoGet,
 }

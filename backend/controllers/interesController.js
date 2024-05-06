@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionInteres');
+const Conexion = require('../database/ConexionInteres')
 
 const interesGet =  (req, res = response) => {
     const conx = new Conexion();
+    
     conx.getInteres(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
 const interesPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postInteres(req.body)    
+        
+    conx.registrarInteres(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const interesDelete =  (req, res) => {
+const interesDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteInteres(req.params.id)    
+    
+    conx.borrarInteres(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
 const interesPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putInteres(req.params.id, req.body)    
+    
+    conx.modificarInteres(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
-
 
 module.exports = {
     interesDelete,
     interesPost,
     interesPut,
-    interesGet
+    interesGet,
 }
