@@ -66,7 +66,7 @@ class ConexionUsuario {
             // const usuarioNuevo = new Persona(body); //Con esto añade los timeStamps.
             // await usuarioNuevo.save();
             const usuarioNuevo = await models.usuario.create(body);
-            resultado = 1; // Asume que la inserción fue exitosa
+            resultado = "Usuario creado correctamente";
         } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
                 console.log(`El id ${body.id} ya existe en la base de datos.`);
