@@ -1,1 +1,0 @@
-//esperar a hacerlo con graphQL

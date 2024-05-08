@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionInteresPreferencia');
+const Conexion = require('../database/ConexionInterespreferencia')
 
-const interesPreferenciaGet =  (req, res = response) => {
+const interespreferenciaGet =  (req, res = response) => {
     const conx = new Conexion();
-    conx.getInteresPreferencia(req.params.id)    
+    
+    conx.getInterespreferencia(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
-const interesPreferenciaPost =  (req = request, res = response) => {
+const interespreferenciaPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postInteresPreferencia(req.body)    
+        
+    conx.registrarInterespreferencia(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const interesPreferenciaDelete =  (req, res) => {
+const interespreferenciaDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteInteresPreferencia(req.params.id)    
+    
+    conx.borrarInterespreferencia(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
-const interesPreferenciaPut =  (req, res = response) => {
+const interespreferenciaPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putInteresPreferencia(req.params.id, req.body)    
+    
+    conx.modificarInterespreferencia(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
-
 
 module.exports = {
-    interesPreferenciaDelete,
-    interesPreferenciaPost,
-    interesPreferenciaPut,
-    interesPreferenciaGet
+    interespreferenciaDelete,
+    interespreferenciaPost,
+    interespreferenciaPut,
+    interespreferenciaGet,
 }

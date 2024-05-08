@@ -1,62 +1,65 @@
 const {response,request} = require('express');
-const Conexion = require('../database/conexionNinoPreferencia');
+const Conexion = require('../database/ConexionNinopreferencia')
 
-const ninoPreferenciaGet =  (req, res = response) => {
+const ninopreferenciaGet =  (req, res = response) => {
     const conx = new Conexion();
-    conx.getNinoPreferencia(req.params.id)    
+    
+    conx.getNinopreferencia(req.params.id)    
         .then( msg => {
-
+            console.log('Listado correcto!');
             res.status(200).json(msg);
         })
         .catch( err => {
-           
-            res.status(200).json({'msg':'No se ha encontrado el registro'});
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
         });
 }
 
-const ninoPreferenciaPost =  (req = request, res = response) => {
+const ninopreferenciaPost =  (req = request, res = response) => {
     const conx = new Conexion();
-    conx.postNinoPreferencia(req.body)    
+        
+    conx.registrarNinopreferencia(req.body)    
         .then( msg => {
-         
+            console.log('Insertado correctamente!');
             res.status(201).json(msg);
         })
         .catch( err => {
-           
+            console.log('Fallo en el registro!');
             res.status(203).json(err);
         });
 }
 
-const ninoPreferenciaDelete =  (req, res) => {
+const ninopreferenciaDelete =  (req, res = response) => {
     const conx = new Conexion();
-    conx.deleteNinoPreferencia(req.params.id)    
+    
+    conx.borrarNinopreferencia(req.params.id)    
         .then( msg => {
-           
+            console.log('Borrado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en el borrado!');
             res.status(203).json(err);
         });
 }
 
-const ninoPreferenciaPut =  (req, res = response) => {
+const ninopreferenciaPut =  (req, res = response) => {
     const conx = new Conexion();
-    conx.putNinoPreferencia(req.params.id, req.body)    
+    
+    conx.modificarNinopreferencia(req.params.id, req.body)    
         .then( msg => {
- 
+            console.log('Modificado correctamente!');
             res.status(202).json(msg);
         })
         .catch( err => {
-        
+            console.log('Fallo en la modificación!');
             res.status(203).json(err);
         });
 }
-
 
 module.exports = {
-    ninoPreferenciaDelete,
-    ninoPreferenciaPost,
-    ninoPreferenciaPut,
-    ninoPreferenciaGet
+    ninopreferenciaDelete,
+    ninopreferenciaPost,
+    ninopreferenciaPut,
+    ninopreferenciaGet,
 }

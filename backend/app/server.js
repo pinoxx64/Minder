@@ -1,79 +1,61 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
+// const body_parser = require('body-parser');
 const cors = require('cors');
 
+//https://sequelize.org/docs/v6/getting-started/
+
 class Server {
+
     constructor() {
         this.app = express();
-        this.serverExpress = require('http').createServer(this.app);
-        this.serverWebSocket = require('http').createServer(this.app);
-        /*this.io = require('socket.io')(this.serverWebSocket, {
-            cors: {
-                origin:'*',
-                methods: ["*"],
-                allowedHeaders: [""],
-                credentials: true
-            }
-        });*/
+        this.usuarioPath = '/api/usuario';
+        this.rolPath = '/api/rol';
+        this.usuariorolPath = '/api/usuariorol';
+        this.eventoPath = 'api/evento';
+        this.usuarioeventoPath = 'api/usuarioevento';
+        this.chatPath = 'api/chat';
+        this.mensajechatPath = 'api/mensajechat';
+        this.preferenciaPath = 'api/preferencia';
+        this.ninoPath = 'api/nino';
+        this.interesPath = 'api/interes';
+        this.tiporelacionPath = 'api/tiporelacion';
+        this.ninopreferenciaPath = 'api/ninopreferencia';
+        this.interespreferenciaPath = 'api/interespreferencia';
+        this.tipopreferenciaPath = 'api/tipopreferencia';
 
-        this.chat = '/api/chat'
-        this.evento = '/api/evento'
-        this.interes = '/api/interes'
-        this.interesPreferencia = '/api/interesPreferencia'
-        this.listaAmigo = '/api/listaAmigo'
-        this.mensajeChat = '/api/mensajeChat'
-        this.nino = '/api/nino'
-        this.ninoPreferencia = '/api/ninoPreferencia'
-        this.preferencia = '/api/preferencia'
-        this.rol = '/api/rol'
-        this.tipoPreferencia = '/api/tipoPreferencia'
-        this.tipoRelacion = '/api/tipoRelacion'
-        this.usuario = '/api/usuario'
-        this.usuarioEvento = '/api/usuarioEvento'
-        this.usuarioRol = '/api/usuarioRol'
-
+        //Middlewares
         this.middlewares();
+
         this.routes();
-        this.sockets();
-
+        
     }
+
     middlewares() {
-        this.app.use(cors({origin:'*'}));
+        this.app.use(cors());
         this.app.use(express.json());
-        this.app.use(fileUpload({
-            useTempFiles: true,
-            tempFileDir: '/tmp/',
-            createParentPath: true
-        }));
     }
-    routes() {
-        this.app.use(this.chat, require('../routes/chatRutas'))
-        this.app.use(this.evento, require('../routes/eventoRutas'))
-        this.app.use(this.interes, require('../routes/interesRutas'))
-        this.app.use(this.interesPreferencia, require('../routes/interesPreferenciaRutas'))
-        this.app.use(this.listaAmigo, require('../routes/listaAmigoRutas'))
-        this.app.use(this.mensajeChat, require('../routes/mensajeChatRutas'))
-        this.app.use(this.nino, require('../routes/ninoRutas'))
-        this.app.use(this.ninoPreferencia, require('../routes/ninoPreferenciaRutas'))
-        this.app.use(this.preferencia, require('../routes/preferenciaRutas'))
-        this.app.use(this.rol, require('../routes/rolRutas'))
-        this.app.use(this.tipoPreferencia, require('../routes/tipoPreferenciaRutas'))
-        this.app.use(this.tipoRelacion, require('../routes/tipoRelacionRutas'))
-        this.app.use(this.usuario, require('../routes/usuarioRutas'))
-        this.app.use(this.usuarioEvento, require('../routes/usuarioEventoRutas'))
-        this.app.use(this.usuarioRol, require('../routes/usuarioRolRutas'))
+
+    routes(){
+        this.app.use(this.usuarioPath , require('../routes/usuarioRoutes'));
+        this.app.use(this.rolPath , require('../routes/rolRoutes'));
+        this.app.use(this.usuariorolPath , require('../routes/usuariorolRoutes'));
+        this.app.use(this.eventoPath , require('../routes/eventoRoutes'));
+        this.app.use(this.usuarioeventoPath , require('../routes/usuarioeventoRoutes'));
+        this.app.use(this.chatPath , require('../routes/chatRoutes'));
+        this.app.use(this.mensajechatPath , require('../routes/mensajechatRoutes'));
+        this.app.use(this.preferenciaPath , require('../routes/preferenciaRoutes'));
+        this.app.use(this.ninoPath , require('../routes/ninoRoutes'));
+        this.app.use(this.interesPath , require('../routes/interesRoutes'));
+        this.app.use(this.tiporelacionPath , require('../routes/tiporelacionRoutes'));
+        this.app.use(this.ninopreferenciaPath , require('../routes/ninopreferenciaRoutes'));
+        this.app.use(this.interespreferenciaPath , require('../routes/interespreferenciaRoutes'));
+        this.app.use(this.tipopreferenciaPath , require('../routes/tipopreferenciaRoutes'));
     }
-    /*sockets() {
-
-    }*/
-
 
     listen() {
-        this.serverExpress.listen(process.env.PORT, () => {
-        });
-
-        /*this.serverWebSocket.listen(process.env.WEBSOCKETPORT, () => {
-        });*/
+        this.app.listen(process.env.PORT, () => {
+            console.log(`Servidor escuchando en: ${process.env.PORT}`);
+        })
     }
 }
 

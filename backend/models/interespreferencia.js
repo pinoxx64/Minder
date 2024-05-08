@@ -3,24 +3,22 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class interesPreferencia extends Model {
+  class Interespreferencia extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
-      this.belongsTo(models.preferencia, {
-        foreignKey: 'idPreferencia',
-        as: 'preferencia'
-      });
-      this.belongsTo(models.interes, {
-        foreignKey: 'idInteres',
-        as: 'interes'
-      });
+      // define association here
     }
   }
-  interesPreferencia.init({
+  Interespreferencia.init({
     idPreferencia: DataTypes.INTEGER,
     idInteres: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'interesPreferencia',
+    modelName: 'Interespreferencia',
   });
-  return interesPreferencia;
+  return Interespreferencia;
 };
