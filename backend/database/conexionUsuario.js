@@ -51,7 +51,9 @@ class ConexionUsuario {
     getUsuario = async(id) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.usuario.findByPk(id);
+        resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         this.desconectar();
         if (!resultado){
             throw error;

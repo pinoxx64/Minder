@@ -18,7 +18,7 @@ const usuariosGet =  (req, res = response) => {
 const usuarioGet =  (req, res = response) => {
     const conx = new Conexion();
     
-    conx.getUsuario(req.params.dni)    
+    conx.getUsuario(req.params.id)    
         .then( msg => {
             console.log('Listado correcto!');
             res.status(200).json(msg);
