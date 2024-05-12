@@ -47,7 +47,7 @@ const usuariosPost =  (req = request, res = response) => {
 const usuariosDelete =  (req, res = response) => {
     const conx = new Conexion();
     
-    conx.borrarUsuario(req.params.dni)    
+    conx.borrarUsuario(req.params.id)    
         .then( msg => {
             console.log('Borrado correctamente!');
             res.status(202).json(msg);
@@ -61,7 +61,7 @@ const usuariosDelete =  (req, res = response) => {
 const usuariosPut =  (req, res = response) => {
     const conx = new Conexion();
     
-    conx.modificarUsuario(req.params.dni, req.body)    
+    conx.modificarUsuario(req.params.id, req.body)    
         .then( msg => {
             console.log('Modificado correctamente!');
             res.status(202).json(msg);
