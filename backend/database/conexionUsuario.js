@@ -51,7 +51,9 @@ class ConexionUsuario {
     getUsuario = async(id) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.usuario.findByPk(id);
+        resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         this.desconectar();
         if (!resultado){
             throw error;
@@ -82,7 +84,9 @@ class ConexionUsuario {
 
     modificarUsuario = async(id, body) => {
         this.conectar();
-        let resultado = await models.usuario.findByPk(id);
+        let resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
@@ -94,7 +98,9 @@ class ConexionUsuario {
 
     borrarUsuario = async(id) => {
         this.conectar();
-        let resultado = await models.usuario.findByPk(id);
+        let resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
