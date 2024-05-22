@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -25,7 +25,7 @@ import { PreferenciaService } from '../../service/preferencia.service';
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
-export class RegistroComponent {
+export class RegistroComponent implements OnInit{
   constructor(
     private servicioUsuario: UsuarioService
   ){}
@@ -63,5 +63,31 @@ export class RegistroComponent {
       this.formGroup = new FormGroup({
           date: new FormControl<Date | null>(null)
       });
+  }
+
+  crear(b:Boolean){
+    if (b){
+        //this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
+  
+        this.servicioUsuario.usuariosPost(this.usuarios).subscribe({
+          next: (data: any) => {
+       
+            setTimeout(() => {
+              //this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
+              this.usuarios.id = data.id
+              this.usuarios.nombre= ''
+              this.usuarios.correo= ''
+              this.usuarios.fechaNacimiento= new Date(1900, 0, 1)
+              this.usuarios.contrasena= ''
+              this.usuarios.genero= ''
+              this.usuarios.foto= ''
+              window.location.reload() 
+            });
+          },
+          /*error: (error) => {
+            this.messageService.add({severity: 'error', summary:'Crear usuario', detail:'Ha surguido un error al crear el usuario, inténtelo de nuevo', life:3000});
+          }*/
+        });
+    }
   }
 }
