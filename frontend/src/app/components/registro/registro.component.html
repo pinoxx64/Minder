@@ -14,6 +14,46 @@
                 <input pInputText id="nombre" aria-describedby="nombre-help" [(ngModel)]="usuarios.nombre"/>
             </div>
 
+            <div class="flex flex-column">
+                <label for="correo">Correo</label>
+                <input pInputText id="correo" aria-describedby="correo-help" [(ngModel)]="usuarios.correo"/>
+            </div>
+
+            <div class="flex flex-column"><!--retocar esto-->
+                <form [formGroup]="formGroup">
+                    <p-calendar formControlName="date"/>
+                </form>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="contrasena">Contraseña</label>
+                <input pInputText id="contrasena" aria-describedby="contrasena" [(ngModel)]="usuarios.contrasena"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="genero">Genero</label>
+                <input pInputText id="genero" aria-describedby="genero" [(ngModel)]="usuarios.genero"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="foto">Foto</label>
+                <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
+            </div>
+
+            <div class="flex flex-column"><!--Cambiar estos 3-->
+                <input id="arte" type="text" pInputText [(ngModel)]="numArte" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numArte" class="w-full" />
+            </div>
+
+            <div class="flex flex-column">
+                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numDeporte" class="w-full" />
+            </div>
+
+            <div class="flex flex-column">
+                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numPolitico" class="w-full" />
+            </div>
         </div>
     </div>
     </p-dialog>
