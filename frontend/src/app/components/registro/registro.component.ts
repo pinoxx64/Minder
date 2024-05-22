@@ -3,8 +3,10 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { SliderModule } from 'primeng/slider';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { MessageService } from 'primeng/api';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
@@ -20,13 +22,20 @@ import { PreferenciaService } from '../../service/preferencia.service';
     DialogModule,
     SliderModule,
     ReactiveFormsModule, 
-    CalendarModule
+    CalendarModule,
+    FormsModule,
+    ConfirmComponent
   ],
   templateUrl: './registro.component.html',
-  styleUrl: './registro.component.css'
+  styleUrl: './registro.component.css',
+  providers:[
+    UsuarioService,
+    MessageService
+  ]
 })
 export class RegistroComponent implements OnInit{
   constructor(
+    public messageService: MessageService,
     private servicioUsuario: UsuarioService
   ){}
   usuarios: Usuario = { 
@@ -49,6 +58,10 @@ export class RegistroComponent implements OnInit{
   numDeporte: number = 50;
   numPolitico: number = 50;
 
+  formGroup: FormGroup | undefined;
+
+  //--------------------------------------------------------------------------------------
+
   showDialog() {
     this.visible = true;
   }
@@ -56,8 +69,6 @@ export class RegistroComponent implements OnInit{
   cerrar(): void {
     this.cerrarModal.emit();
   }
-
-  formGroup: FormGroup | undefined;
 
   ngOnInit() {
       this.formGroup = new FormGroup({

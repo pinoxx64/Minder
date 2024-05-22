@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-toast></p-toast><!--Queda lo de los slider-->
 
 <div class="card flex justify-content-center">
     @if (tipo==0) {
@@ -9,7 +9,7 @@
     <div class="card flex justify-content-center" class="custom-dialog">
         <div class="flex flex-row gap-4">
         
-            <div class="flex flex-column"><!--Mirar linea 36 de nuevo usuario del CEPA-->
+            <div class="flex flex-column">
                 <label for="nombre">Nombre</label>
                 <input pInputText id="nombre" aria-describedby="nombre-help" [(ngModel)]="usuarios.nombre"/>
             </div>
@@ -19,10 +19,9 @@
                 <input pInputText id="correo" aria-describedby="correo-help" [(ngModel)]="usuarios.correo"/>
             </div>
 
-            <div class="flex flex-column"><!--retocar esto-->
-                <form [formGroup]="formGroup">
-                    <p-calendar formControlName="date"/>
-                </form>
+            <div class="flex flex-column">
+                <label for="fecha">Fecha de Nacimiento</label>
+                <input pInputText id="fecha" placeholder="DD/MM/YYYY" aria-describedby="fecha" [(ngModel)]="usuarios.fechaNacimiento"/>
             </div>
 
             <div class="flex flex-column">
@@ -54,6 +53,9 @@
                 <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
                 <p-slider [(ngModel)]="numPolitico" class="w-full" />
             </div>
+        </div>
+        <div style="margin-top: 20px;" >
+            <app-confirm tipo="Crear" icono="plus" mensaje="¿Deseas crear este evento?" color="success" (confirmacion)="crear($event)"></app-confirm>
         </div>
     </div>
     </p-dialog>
