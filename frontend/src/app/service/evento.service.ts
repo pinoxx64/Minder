@@ -11,6 +11,14 @@ export class EventoService{
     baseUrl = environment.baseUrl+environment.urlEvento
     constructor(private http:HttpClient){}
 
+    eventosGet(): Observable<any  | undefined> {
+      return this.http.get<any>(this.baseUrl).pipe(
+        catchError((error) =>{
+          return of(undefined)
+        })
+      )
+    }
+
       eventoGet(id:number): Observable<any | undefined> {
     
         return this.http.get<any>(this.baseUrl+'/'+id).pipe(

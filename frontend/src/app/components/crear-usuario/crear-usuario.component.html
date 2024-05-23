@@ -1,1 +1,62 @@
-<p>crear-usuario works!</p>
+<p-toast></p-toast><!--Queda lo de los slider-->
+
+<div class="card flex justify-content-center">
+    @if (tipo==0) {
+        <p-button [raised]="true" [outlined]="true" (click)="showDialog()" [raised]="true" label="Registrar" icon="pi pi-pencil"></p-button>
+    }
+    <p-dialog header="Registrarse" [(visible)]="visible" [modal]="true" 
+    [draggable]="false" (onHide)="cerrar()" [resizable]="false">
+    <div class="card flex justify-content-center" class="custom-dialog">
+        <div class="flex flex-row gap-4">
+        
+            <div class="flex flex-column">
+                <label for="nombre">Nombre</label>
+                <input pInputText id="nombre" aria-describedby="nombre-help" [(ngModel)]="usuarios.nombre"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="correo">Correo</label>
+                <input pInputText id="correo" aria-describedby="correo-help" [(ngModel)]="usuarios.correo"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="fecha">Fecha de Nacimiento</label>
+                <input pInputText id="fecha" placeholder="DD/MM/YYYY" aria-describedby="fecha" [(ngModel)]="usuarios.fechaNacimiento"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="contrasena">Contraseña</label>
+                <input pInputText id="contrasena" aria-describedby="contrasena" [(ngModel)]="usuarios.contrasena"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="genero">Genero</label>
+                <input pInputText id="genero" aria-describedby="genero" [(ngModel)]="usuarios.genero"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="foto">Foto</label>
+                <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
+            </div>
+
+            <div class="flex flex-column"><!--Cambiar estos 3-->
+                <input id="arte" type="text" pInputText [(ngModel)]="numArte" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numArte" class="w-full" />
+            </div>
+
+            <div class="flex flex-column">
+                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numDeporte" class="w-full" />
+            </div>
+
+            <div class="flex flex-column">
+                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
+                <p-slider [(ngModel)]="numPolitico" class="w-full" />
+            </div>
+        </div>
+        <div style="margin-top: 20px;" >
+            <app-confirm tipo="Crear" icono="plus" mensaje="¿Deseas crear este evento?" color="success" (confirmacion)="crear($event)"></app-confirm>
+        </div>
+    </div>
+    </p-dialog>
+</div>

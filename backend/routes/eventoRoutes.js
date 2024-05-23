@@ -3,6 +3,7 @@ const controlador = require('../controllers/eventoController');
 const router = Router();
 
 //El segundo parámetro (optativo) son los middlewares.
+router.get('/', controlador.eventosGet);
 router.get('/:id', controlador.eventoGet);
 router.post('/', controlador.eventoPost);
 router.put('/:id?', controlador.eventoPut);
