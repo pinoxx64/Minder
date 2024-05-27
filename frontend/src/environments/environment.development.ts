@@ -14,5 +14,8 @@ export const environment = {
     urlTipoRelacion:'/tiporelacion',
     urlNinoPreferencia:'/ninopreferencia',
     urlInteresPreferencia:'/interespreferencia',
-    urlTipoPrefetencia:'/tipopreferencia'
+    urlTipoPrefetencia:'/tipopreferencia',
+    urlAuth:'/auth',
+    urlLogin:'/login',
+    urlRegistro:'/register'
 };
