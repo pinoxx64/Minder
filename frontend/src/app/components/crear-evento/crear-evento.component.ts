@@ -14,9 +14,9 @@ import { Preferencia } from '../../interface/preferencia';
 import { PreferenciaService } from '../../service/preferencia.service';
 
 @Component({
-  selector: 'app-registro',
+  selector: 'app-crear-evento',
   standalone: true,
-  imports: [
+  imports: [    
     ToastModule,
     ButtonModule,
     DialogModule,
@@ -26,14 +26,15 @@ import { PreferenciaService } from '../../service/preferencia.service';
     FormsModule,
     ConfirmComponent
   ],
-  templateUrl: './registro.component.html',
-  styleUrl: './registro.component.css',
+  templateUrl: './crear-evento.component.html',
+  styleUrl: './crear-evento.component.css',
   providers:[
     UsuarioService,
     MessageService
   ]
+
 })
-export class RegistroComponent implements OnInit{
+export class CrearEventoComponent {
   constructor(
     public messageService: MessageService,
     private servicioUsuario: UsuarioService
