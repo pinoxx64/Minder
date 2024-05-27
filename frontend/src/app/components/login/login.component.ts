@@ -1,9 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { SliderModule } from 'primeng/slider';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { MessageService } from 'primeng/api';
+import { ConfirmComponent } from '../confirm/confirm.component';
+
+import { Usuario } from '../../interface/usuario';
+import { UsuarioService } from '../../service/usuario.service';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [
+    ToastModule,
+    ButtonModule,
+    DialogModule,
+    SliderModule,
+    ReactiveFormsModule, 
+    CalendarModule,
+    FormsModule,
+    ConfirmComponent
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

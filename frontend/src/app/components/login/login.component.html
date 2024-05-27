@@ -1,6 +1,5 @@
 <div class="card flex justify-content-center">
     <p-button [raised]="true" [outlined]="true" (click)="showDialog()" icon="pi pi-user" label="Login"></p-button>
-        @if(register==false){
         
         <p-dialog header="Início de sesión" [(visible)]="visible" [modal]="true" 
         [draggable]="false" [resizable]="false" (onHide)="cerrar()">
@@ -10,12 +9,12 @@
             <div class="flex flex-row gap-4">
                 <div class="flex flex-column">
                     <label for="username1">Correo</label>
-                    <input [(ngModel)]="Correo" >
+                    <input [(ngModel)]="usuarios.correo" >
                     <small id="username-help1">Introduce el Correo de usuario</small>
                 </div>
             <div class="flex flex-column">
                 <label for="username1">Contraseña</label>
-             <input type="contrasena" [(ngModel)]="contrasena" >
+             <input type="contrasena" [(ngModel)]="usuarios.contrasena" >
                 <small id="username-help1">Introduce la contraseña de usuario</small>
             </div>
     
@@ -32,7 +31,7 @@
         </div>
     </div>
 </p-dialog>
-}<!--@else{
+<!--@else{
    
         
         <p-dialog header="Registro" [(visible)]="visible" [modal]="true" 
