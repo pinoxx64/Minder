@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { accesoGuard } from './guards/acceso.guard';
 
 export const routes: Routes = [
-    {path: '', component:AppComponent},
+    {path: '', redirectTo: '/presentacion', pathMatch: 'full'},
+    {path: 'presentacion', component:AppComponent},
     {path: 'inicio', component:InicioComponent},
     {path: 'evento', component:EventoComponent},
-    {path: 'usuario', component:VerUsuarioComponent},
+    {path: 'usuario',component:VerUsuarioComponent,
+    canActivate: [accesoGuard], data: {rol: ['Administrador']}},
     {path: 'listaChats', component:ListaChatsComponent},
     {path: 'chat', component:ChatComponent}
 

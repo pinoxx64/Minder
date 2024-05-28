@@ -8,11 +8,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/api';
 import { ConfirmComponent } from '../confirm/confirm.component';
 
-import { Usuario } from '../../interface/usuario';
-import { UsuarioService } from '../../service/usuario.service';
-import { Preferencia } from '../../interface/preferencia';
-import { PreferenciaService } from '../../service/preferencia.service';
-
+import { Evento } from '../../interface/evento';
+import { EventoService } from '../../service/evento.service';
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
@@ -29,7 +26,7 @@ import { PreferenciaService } from '../../service/preferencia.service';
   templateUrl: './crear-evento.component.html',
   styleUrl: './crear-evento.component.css',
   providers:[
-    UsuarioService,
+    EventoService,
     MessageService
   ]
 
@@ -37,27 +34,22 @@ import { PreferenciaService } from '../../service/preferencia.service';
 export class CrearEventoComponent {
   constructor(
     public messageService: MessageService,
-    private servicioUsuario: UsuarioService
+    private servicioEvento: EventoService
   ){}
-  usuarios: Usuario = { 
+  eventos: Evento = { 
     id: 0, 
     nombre: '', 
-    correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
-    contrasena: '',
-    genero: '',
-    foto: ''
+    fecha: new Date(1900, 0, 1),
+    descrip: '',
+    latitud: 0.0,
+    longitud: 0.0
   }
 
-  @Input() usuario?: any
+  @Input() evento?: any
   @Input() tipo=0
   @Input() visible: boolean = false;
 
   @Output() cerrarModal = new EventEmitter<void>();
-
-  numArte: number = 50;
-  numDeporte: number = 50;
-  numPolitico: number = 50;
 
   formGroup: FormGroup | undefined;
 
@@ -79,25 +71,24 @@ export class CrearEventoComponent {
 
   crear(b:Boolean){
     if (b){
-        //this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
+        this.messageService.add({ severity: 'info', summary:'Crear evento', detail:'En curso', life:3000});
   
-        this.servicioUsuario.usuariosPost(this.usuarios).subscribe({
+        this.servicioEvento.eventosPost(this.eventos).subscribe({
           next: (data: any) => {
        
             setTimeout(() => {
-              //this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
-              this.usuarios.id = data.id
-              this.usuarios.nombre= ''
-              this.usuarios.correo= ''
-              this.usuarios.fechaNacimiento= new Date(1900, 0, 1)
-              this.usuarios.contrasena= ''
-              this.usuarios.genero= ''
-              this.usuarios.foto= ''
+              this.messageService.add({severity: 'success', summary:'Crear evento', detail:'Completado', life:3000});
+              this.eventos.id = data.id
+              this.eventos.nombre= ''
+              this.eventos.fecha= new Date(1900, 0, 1)
+              this.eventos.descrip= ''
+              this.eventos.latitud= 0.0
+              this.eventos.longitud= 0.0
               window.location.reload() 
             });
           },
           /*error: (error) => {
-            this.messageService.add({severity: 'error', summary:'Crear usuario', detail:'Ha surguido un error al crear el usuario, inténtelo de nuevo', life:3000});
+            this.messageService.add({severity: 'error', summary:'Crear evento', detail:'Ha surguido un error al crear el evento, inténtelo de nuevo', life:3000});
           }*/
         });
     }

@@ -78,13 +78,13 @@ export class CrearUsuarioComponent {
 
   crear(b:Boolean){
     if (b){
-        //this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
+        this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
   
         this.servicioUsuario.usuariosPost(this.usuarios).subscribe({
           next: (data: any) => {
        
             setTimeout(() => {
-              //this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
+              this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
               this.usuarios.id = data.id
               this.usuarios.nombre= ''
               this.usuarios.correo= ''
@@ -95,9 +95,9 @@ export class CrearUsuarioComponent {
               window.location.reload() 
             });
           },
-          /*error: (error) => {
+          error: (error) => {
             this.messageService.add({severity: 'error', summary:'Crear usuario', detail:'Ha surguido un error al crear el usuario, inténtelo de nuevo', life:3000});
-          }*/
+          }
         });
     }
   }
