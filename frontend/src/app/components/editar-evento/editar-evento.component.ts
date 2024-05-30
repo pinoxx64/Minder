@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-editar-evento',
@@ -23,7 +24,8 @@ import { EventoService } from '../../service/evento.service';
     ButtonModule,
     InputTextModule,
     InputSwitchModule,
-    ConfirmComponent
+    ConfirmComponent,
+    CalendarModule
   ],
   templateUrl: './editar-evento.component.html',
   styleUrl: './editar-evento.component.css',

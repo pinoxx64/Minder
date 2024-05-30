@@ -39,7 +39,7 @@ export class CrearEventoComponent {
   eventos: Evento = { 
     id: 0, 
     nombre: '', 
-    fecha: new Date(1900, 0, 1),
+    fecha: new Date(2024, 0, 1),
     descrip: '',
     latitud: 0.0,
     longitud: 0.0
