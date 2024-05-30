@@ -8,6 +8,7 @@ import { ListaChatsComponent } from './components/lista-chats/lista-chats.compon
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { accesoGuard } from './guards/acceso.guard';
+import { VistaEventoComponent } from './components/vista-evento/vista-evento.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/presentacion', pathMatch: 'full'},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path: 'usuario',component:VerUsuarioComponent/*,
 canActivate: [accesoGuard], data: {rol: ['Administrador']}*/},
     {path: 'listaChats', component:ListaChatsComponent},
-    {path: 'chat', component:ChatComponent}
+    {path: 'chat', component:ChatComponent},
+    {path: 'eventoUsuario', component:VistaEventoComponent}
 
 ];
