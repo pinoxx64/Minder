@@ -11,17 +11,17 @@ class Server {
         this.usuarioPath = '/api/usuario';
         this.rolPath = '/api/rol';
         this.usuariorolPath = '/api/usuariorol';
-        this.eventoPath = 'api/evento';
-        this.usuarioeventoPath = 'api/usuarioevento';
-        this.chatPath = 'api/chat';
-        this.mensajechatPath = 'api/mensajechat';
-        this.preferenciaPath = 'api/preferencia';
-        this.ninoPath = 'api/nino';
-        this.interesPath = 'api/interes';
-        this.tiporelacionPath = 'api/tiporelacion';
-        this.ninopreferenciaPath = 'api/ninopreferencia';
-        this.interespreferenciaPath = 'api/interespreferencia';
-        this.tipopreferenciaPath = 'api/tipopreferencia';
+        this.eventoPath = '/api/evento';
+        this.usuarioeventoPath = '/api/usuarioevento';
+        this.chatPath = '/api/chat';
+        this.mensajechatPath = '/api/mensajechat';
+        this.preferenciaPath = '/api/preferencia';
+        this.ninoPath = '/api/nino';
+        this.interesPath = '/api/interes';
+        this.tiporelacionPath = '/api/tiporelacion';
+        this.ninopreferenciaPath = '/api/ninopreferencia';
+        this.interespreferenciaPath = '/api/interespreferencia';
+        this.tipopreferenciaPath = '/api/tipopreferencia';
 
         //Middlewares
         this.middlewares();
