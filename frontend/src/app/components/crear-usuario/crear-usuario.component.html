@@ -5,13 +5,14 @@
         <p-button [raised]="true" [outlined]="true" (click)="showDialog()" [raised]="true" label="Registrar" icon="pi pi-pencil"></p-button>
     }
     <p-dialog header="Registrarse" [(visible)]="visible" [modal]="true" 
-    [draggable]="false" (onHide)="cerrar()" [resizable]="false">
+    [draggable]="false" (onHide)="cerrar()" [resizable]="false" [style]="{ width: '50rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">>
     <div class="card flex justify-content-center" class="custom-dialog">
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-row gap-4"> 
         
             <div class="flex flex-column">
                 <label for="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="nombre-help" [(ngModel)]="usuarios.nombre"/>
+                <input pInputText id="nombre" aria-describedby="eventname-help1" [(ngModel)]="usuarios.nombre"/>
             </div>
 
             <div class="flex flex-column">
@@ -21,7 +22,7 @@
 
             <div class="flex flex-column">
                 <label for="fecha">Fecha de Nacimiento</label>
-                <input pInputText id="fecha" placeholder="DD/MM/YYYY" aria-describedby="fecha" [(ngModel)]="usuarios.fechaNacimiento"/>
+                <p-calendar id="fecha" placeholder="DD/MM/YYYY" aria-describedby="eventname-help2"  [(ngModel)]="usuarios.fechaNacimiento"/>
             </div>
 
             <div class="flex flex-column">

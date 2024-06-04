@@ -12,6 +12,7 @@ import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
 import { Preferencia } from '../../interface/preferencia';
 import { PreferenciaService } from '../../service/preferencia.service';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -51,6 +52,7 @@ export class CrearUsuarioComponent {
   @Input() usuario?: any
   @Input() tipo=0
   @Input() visible: boolean = false;
+  //maxDate = new Date().toLocaleDateString();
 
   @Output() cerrarModal = new EventEmitter<void>();
 
