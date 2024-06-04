@@ -25,13 +25,13 @@
 
             <div class="flex flex-column">
                 <label for="username3">Fecha de Nacimiento</label>
-                <input pInputText id="fechaNacimiento" aria-describedby="username-help3" [(ngModel)]="usuarios.fechaNacimiento" />
+                <p-calendar id="fecha"  aria-describedby="eventname-help2"  [(ngModel)]="usuarios.fechaNacimiento"/>
                 <small id="username-help3">Introduce una fecha para el nuevo usuario</small>
             </div>
 
             <div class="flex flex-column">
                 <label for="username4">Contraseña</label>
-                <input pInputText id="contrasena" aria-describedby="username-help4" [(ngModel)]="usuarios.contrasena" />
+                <input pInputText id="contrasena" aria-describedby="username-help4"  />
                 <small id="username-help4">Introduce una contraseña para el nuevo usuario</small>
             </div>
 

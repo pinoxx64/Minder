@@ -43,7 +43,7 @@ export class CrearUsuarioComponent {
     id: 0, 
     nombre: '', 
     correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
+    fechaNacimiento: new Date(2001, 0, 1),
     contrasena: '',
     genero: '',
     foto: ''
@@ -61,6 +61,9 @@ export class CrearUsuarioComponent {
   numPolitico: number = 50;
 
   formGroup: FormGroup | undefined;
+  
+  formularioFoto: FormData | null = null
+  fotoPreview: string | null = null
 
   //--------------------------------------------------------------------------------------
 
@@ -78,6 +81,23 @@ export class CrearUsuarioComponent {
       });
   }
 
+  uplodadFoto(event: any) {
+    const file = event.target.files[0]
+    if (file) {
+      this.formularioFoto = new FormData()
+      this.formularioFoto.append('archivo', file)
+      this.fotoPreview = URL.createObjectURL(file);
+      
+    } else {
+      this.formularioFoto = null
+    }
+  }
+  limpiarFoto(archivo: any) {
+    archivo.value = null
+    this.formularioFoto = null
+    this.fotoPreview = null
+  }
+
   crear(b:Boolean){
     if (b){
         this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
@@ -90,7 +110,7 @@ export class CrearUsuarioComponent {
               this.usuarios.id = data.id
               this.usuarios.nombre= ''
               this.usuarios.correo= ''
-              this.usuarios.fechaNacimiento= new Date(1900, 0, 1)
+              this.usuarios.fechaNacimiento= new Date(2001, 0, 1)
               this.usuarios.contrasena= ''
               this.usuarios.genero= ''
               this.usuarios.foto= ''

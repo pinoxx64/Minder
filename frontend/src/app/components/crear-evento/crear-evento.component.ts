@@ -7,6 +7,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/api';
 import { ConfirmComponent } from '../confirm/confirm.component';
+//import { GoogleMapsModule } from '@angular/google-maps';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
@@ -52,6 +53,8 @@ export class CrearEventoComponent {
   @Output() cerrarModal = new EventEmitter<void>();
 
   formGroup: FormGroup | undefined;
+
+
 
   //--------------------------------------------------------------------------------------
 

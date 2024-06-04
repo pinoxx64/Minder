@@ -22,6 +22,7 @@ class Server {
         this.ninopreferenciaPath = '/api/ninopreferencia';
         this.interespreferenciaPath = '/api/interespreferencia';
         this.tipopreferenciaPath = '/api/tipopreferencia';
+        this.uploadFotoUsuarioPath = '/api/uploadFotoUsuario';
 
         //Middlewares
         this.middlewares();
@@ -50,6 +51,7 @@ class Server {
         this.app.use(this.ninopreferenciaPath , require('../routes/ninopreferenciaRoutes'));
         this.app.use(this.interespreferenciaPath , require('../routes/interespreferenciaRoutes'));
         this.app.use(this.tipopreferenciaPath , require('../routes/tipopreferenciaRoutes'));
+        this.app.use(this.uploadFotoUsuarioPath , require('../routes/uploadFotosUsuarioRoutes'))
     }
 
     listen() {

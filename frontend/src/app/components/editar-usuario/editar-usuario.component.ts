@@ -15,6 +15,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @Component({
@@ -28,7 +29,8 @@ import { UsuarioService } from '../../service/usuario.service';
     InputTextModule,
     InputSwitchModule,
     ConfirmComponent,
-    CommonModule
+    CommonModule,
+    CalendarModule
   ],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css',
@@ -45,7 +47,7 @@ export class EditarUsuarioComponent {
     id: 0, 
     nombre: '', 
     correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
+    fechaNacimiento: new Date(2001, 1, 1),
     contrasena: '',
     genero: '',
     foto: ''
