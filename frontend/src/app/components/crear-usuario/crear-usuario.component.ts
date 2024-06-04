@@ -12,6 +12,7 @@ import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
 import { Preferencia } from '../../interface/preferencia';
 import { PreferenciaService } from '../../service/preferencia.service';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -42,7 +43,7 @@ export class CrearUsuarioComponent {
     id: 0, 
     nombre: '', 
     correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
+    fechaNacimiento: new Date(2001, 0, 1),
     contrasena: '',
     genero: '',
     foto: ''
@@ -51,6 +52,7 @@ export class CrearUsuarioComponent {
   @Input() usuario?: any
   @Input() tipo=0
   @Input() visible: boolean = false;
+  //maxDate = new Date().toLocaleDateString();
 
   @Output() cerrarModal = new EventEmitter<void>();
 
@@ -59,6 +61,9 @@ export class CrearUsuarioComponent {
   numPolitico: number = 50;
 
   formGroup: FormGroup | undefined;
+  
+  formularioFoto: FormData | null = null
+  fotoPreview: string | null = null
 
   //--------------------------------------------------------------------------------------
 
@@ -76,28 +81,45 @@ export class CrearUsuarioComponent {
       });
   }
 
+  uplodadFoto(event: any) {
+    const file = event.target.files[0]
+    if (file) {
+      this.formularioFoto = new FormData()
+      this.formularioFoto.append('archivo', file)
+      this.fotoPreview = URL.createObjectURL(file);
+      
+    } else {
+      this.formularioFoto = null
+    }
+  }
+  limpiarFoto(archivo: any) {
+    archivo.value = null
+    this.formularioFoto = null
+    this.fotoPreview = null
+  }
+
   crear(b:Boolean){
     if (b){
-        //this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
+        this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
   
         this.servicioUsuario.usuariosPost(this.usuarios).subscribe({
           next: (data: any) => {
        
             setTimeout(() => {
-              //this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
+              this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
               this.usuarios.id = data.id
               this.usuarios.nombre= ''
               this.usuarios.correo= ''
-              this.usuarios.fechaNacimiento= new Date(1900, 0, 1)
+              this.usuarios.fechaNacimiento= new Date(2001, 0, 1)
               this.usuarios.contrasena= ''
               this.usuarios.genero= ''
               this.usuarios.foto= ''
               window.location.reload() 
             });
           },
-          /*error: (error) => {
+          error: (error) => {
             this.messageService.add({severity: 'error', summary:'Crear usuario', detail:'Ha surguido un error al crear el usuario, inténtelo de nuevo', life:3000});
-          }*/
+          }
         });
     }
   }

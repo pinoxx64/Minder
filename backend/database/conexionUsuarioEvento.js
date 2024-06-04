@@ -40,7 +40,41 @@ class ConexionEvento {
     getUsuarioEvento = async(id) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.Usuarioevento.findByPk(id);
+        resultado = await models.usuarioevento.findByPk(id, {
+            attributes: ['id', 'idEvento', 'idUsuario']
+        });
+        this.desconectar();
+        if (!resultado){
+            throw error;
+        }
+        return resultado;
+    }
+
+    getUsuarioEventoPorEvento = async(idEvento) =>{
+        let resultado = [];
+        this.conectar();
+        resultado = await models.usuarioevento.findAll({
+            where: {
+                idEvento : idEvento
+            },
+            attributes: ['id', 'idEvento', 'idUsuario']
+        })
+        this.desconectar();
+        if (!resultado){
+            throw error;
+        }
+        return resultado;
+    }
+
+    getUsuarioEventoPorUsuario = async(idUsuario) => {
+        let resultado = [];
+        this.conectar();
+        resultado = await models.usuarioevento.findAll({
+            where: {
+                idUsuario : idUsuario
+            },
+            attributes: ['id', 'idEvento', 'idUsuario']
+        })
         this.desconectar();
         if (!resultado){
             throw error;
@@ -71,7 +105,9 @@ class ConexionEvento {
 
     modificarUsuarioEvento = async(id, body) => {
         this.conectar();
-        let resultado = await models.Usuarioevento.findByPk(id);
+        let resultado = await models.usuarioevento.findByPk(id, {
+            attributes: ['id', 'idEvento', 'idUsuario']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
@@ -83,7 +119,9 @@ class ConexionEvento {
 
     borrarUsuarioEvento = async(id) => {
         this.conectar();
-        let resultado = await models.Usuarioevento.findByPk(id);
+        let resultado = await models.usuarioevento.findByPk(id, {
+            attributes: ['id', 'idEvento', 'idUsuario']
+        });
         if (!resultado){
             this.desconectar();
             throw error;

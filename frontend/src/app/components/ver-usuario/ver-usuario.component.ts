@@ -5,12 +5,18 @@ import { Subscription } from 'rxjs';
 import { EditableColumn, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { ɵBrowserAnimationBuilder } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogService } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-ver-usuario',
@@ -20,13 +26,19 @@ import { UsuarioService } from '../../service/usuario.service';
     RouterLink,
     TableModule,
     ButtonModule,
+    DialogModule,
+    InputTextModule,
     CrearUsuarioComponent,
-    EditarUsuarioComponent  
+    EditarUsuarioComponent,
+    CommonModule
   ],
   templateUrl: './ver-usuario.component.html',
   styleUrl: './ver-usuario.component.css',
   providers:[
-    UsuarioService
+    DialogService,
+    UsuarioService,
+    BrowserModule,
+    MessageService
   ]
 })
 export class VerUsuarioComponent {

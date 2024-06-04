@@ -11,17 +11,18 @@ class Server {
         this.usuarioPath = '/api/usuario';
         this.rolPath = '/api/rol';
         this.usuariorolPath = '/api/usuariorol';
-        this.eventoPath = 'api/evento';
-        this.usuarioeventoPath = 'api/usuarioevento';
-        this.chatPath = 'api/chat';
-        this.mensajechatPath = 'api/mensajechat';
-        this.preferenciaPath = 'api/preferencia';
-        this.ninoPath = 'api/nino';
-        this.interesPath = 'api/interes';
-        this.tiporelacionPath = 'api/tiporelacion';
-        this.ninopreferenciaPath = 'api/ninopreferencia';
-        this.interespreferenciaPath = 'api/interespreferencia';
-        this.tipopreferenciaPath = 'api/tipopreferencia';
+        this.eventoPath = '/api/evento';
+        this.usuarioeventoPath = '/api/usuarioevento';
+        this.chatPath = '/api/chat';
+        this.mensajechatPath = '/api/mensajechat';
+        this.preferenciaPath = '/api/preferencia';
+        this.ninoPath = '/api/nino';
+        this.interesPath = '/api/interes';
+        this.tiporelacionPath = '/api/tiporelacion';
+        this.ninopreferenciaPath = '/api/ninopreferencia';
+        this.interespreferenciaPath = '/api/interespreferencia';
+        this.tipopreferenciaPath = '/api/tipopreferencia';
+        this.uploadFotoUsuarioPath = '/api/uploadFotoUsuario';
 
         //Middlewares
         this.middlewares();
@@ -50,6 +51,7 @@ class Server {
         this.app.use(this.ninopreferenciaPath , require('../routes/ninopreferenciaRoutes'));
         this.app.use(this.interespreferenciaPath , require('../routes/interespreferenciaRoutes'));
         this.app.use(this.tipopreferenciaPath , require('../routes/tipopreferenciaRoutes'));
+        this.app.use(this.uploadFotoUsuarioPath , require('../routes/uploadFotosUsuarioRoutes'))
     }
 
     listen() {
