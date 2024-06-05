@@ -11,7 +11,7 @@
     
         <ng-template pTemplate="header">
             <tr class="header-glass" style="border: none;">
-                <th style="width:10%"><app-crear-evento></app-crear-evento></th>
+                <th style="width:10%">¿Te apuntas?</th>
                 <th style="width:12%">Nombre</th>
                 <th style="width:12%">Fecha</th>
                 <th style="width:12%">Descripción</th>
@@ -20,7 +20,7 @@
         </ng-template> 
         <ng-template pTemplate="body" let-eventos>
             <tr class="glass">
-                <td><app-editar-evento [evento]="listaEvento" [id]="eventos.id"></app-editar-evento></td>
+                <td><app-apuntarse></app-apuntarse></td>
                 <td>{{eventos.nombre}}</td>
                 <td>{{eventos.fecha}}</td>
                 <td>{{eventos.descrip}}</td>

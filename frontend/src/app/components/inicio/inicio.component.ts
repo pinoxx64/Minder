@@ -16,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './inicio.component.css'
 })
 export class InicioComponent {
-  //products!: Product[]; esto es la interfaz que queremos hacer
+  /*products!: Product[]; esto es la interfaz que queremos hacer
 
   constructor(private productService: ProductService) {}
 
@@ -24,5 +24,5 @@ export class InicioComponent {
       this.productService.getProductsMini().then((data) => {
           this.products = data;
       });
-  }
+  }*/
 }

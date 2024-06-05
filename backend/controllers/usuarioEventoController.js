@@ -1,10 +1,38 @@
 const {response,request} = require('express');
-const Conexion = require('../database/ConexionUsuarioevento')
+const Conexion = require('../database/conexionUsuarioEvento')
 
 const usuarioeventoGet =  (req, res = response) => {
     const conx = new Conexion();
     
     conx.getUsuarioEvento(req.params.id)    
+        .then( msg => {
+            console.log('Listado correcto!');
+            res.status(200).json(msg);
+        })
+        .catch( err => {
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
+        });
+}
+
+const usuarioeventoGetEvento =  (req, res = response) => {
+    const conx = new Conexion();
+    
+    conx.getUsuarioEventoPorEvento(req.params.idEvento)    
+        .then( msg => {
+            console.log('Listado correcto!');
+            res.status(200).json(msg);
+        })
+        .catch( err => {
+            console.log('No hay registro!');
+            res.status(203).json({'msg':'No se ha encontrado el registro'});
+        });
+}
+
+const usuarioeventoGetUsuario =  (req, res = response) => {
+    const conx = new Conexion();
+    
+    conx.getUsuarioEventoPorUsuario(req.params.idUsuario)    
         .then( msg => {
             console.log('Listado correcto!');
             res.status(200).json(msg);
@@ -62,4 +90,6 @@ module.exports = {
     usuarioeventoPost,
     usuarioeventoPut,
     usuarioeventoGet,
+    usuarioeventoGetEvento,
+    usuarioeventoGetUsuario
 }

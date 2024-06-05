@@ -25,26 +25,26 @@
 
             <div class="flex flex-column">
                 <label for="username3">Fecha de Nacimiento</label>
-                <input pInputText id="fechaNacimiento" aria-describedby="username-help3" [(ngModel)]="usuarios.fechaNacimiento" />
-                <small id="username-help3">Introduce un correo para el nuevo usuario</small>
+                <p-calendar id="fecha"  aria-describedby="eventname-help2"  [(ngModel)]="usuarios.fechaNacimiento"/>
+                <small id="username-help3">Introduce una fecha para el nuevo usuario</small>
             </div>
 
             <div class="flex flex-column">
                 <label for="username4">Contraseña</label>
-                <input pInputText id="contrasena" aria-describedby="username-help4" [(ngModel)]="usuarios.contrasena" />
+                <input pInputText id="contrasena" aria-describedby="username-help4"  />
                 <small id="username-help4">Introduce una contraseña para el nuevo usuario</small>
             </div>
 
             <div class="flex flex-column">
                 <label for="username5">Genero</label>
                 <input pInputText id="genero" aria-describedby="username-help5" [(ngModel)]="usuarios.genero" />
-                <small id="username-help5">Introduce un correo para el nuevo usuario</small>
+                <small id="username-help5">Introduce un genero para el nuevo usuario</small>
             </div>
 
             <div class="flex flex-column">
-                <label for="username6">Foto</label>
+                <label for="username6">Foto</label> <!--Esto hay que cambiarlo para que sea con un boton de subir fotos-->
                 <input pInputText id="foto" aria-describedby="username-help6" [(ngModel)]="usuarios.foto" />
-                <small id="username-help6">Introduce un correo para el nuevo usuario</small>
+                <small id="username-help6">Introduce una foto para el nuevo usuario</small>
             </div>
 
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div style="margin-top: 20px;" >
 
-            <app-confirm tipo="Borrar" icono="pi pi-trash" mensaje="¿Deseas borrar esta usuarios?" color="danger" (confirmacion)="eliminar($event)"></app-confirm>
+            <app-confirm tipo="Borrar" icono="pi pi-trash" mensaje="¿Deseas borrar este usuarios?" color="danger" (confirmacion)="eliminar($event)"></app-confirm>
         </div>
   </p-dialog>
 </div>

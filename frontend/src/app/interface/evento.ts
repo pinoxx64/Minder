@@ -1,8 +1,8 @@
 export interface Evento{
     id?:number,
-    nombre:number,
+    nombre:string,
     fecha:Date,
     descrip:string,
-    latitud:Float32Array,
-    longitud:Float32Array
+    latitud:number,
+    longitud:number
 }

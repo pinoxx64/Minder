@@ -7,13 +7,13 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { CrearEventoComponent } from '../crear-evento/crear-evento.component';
-import { EditarEventoComponent } from '../editar-evento/editar-evento.component';
+import { ApuntarseComponent } from '../apuntarse/apuntarse.component';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
 
 @Component({
-  selector: 'app-evento',
+  selector: 'app-vista-evento',
   standalone: true,
   imports: [
     HttpClientModule,
@@ -21,15 +21,15 @@ import { EventoService } from '../../service/evento.service';
     TableModule,
     ButtonModule,
     CrearEventoComponent,
-    EditarEventoComponent
+    ApuntarseComponent
   ],
-  templateUrl: './evento.component.html',
-  styleUrl: './evento.component.css',
+  templateUrl: './vista-evento.component.html',
+  styleUrl: './vista-evento.component.css',
   providers:[
     EventoService
   ]
 })
-export class EventoComponent {
+export class VistaEventoComponent {
   constructor(
     private servicioEvento: EventoService
   ){}

@@ -12,6 +12,9 @@ import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
 import { Preferencia } from '../../interface/preferencia';
 import { PreferenciaService } from '../../service/preferencia.service';
+import { Nino } from '../../interface/nino';
+import { NinoService } from '../../service/nino.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-registro',
@@ -30,19 +33,21 @@ import { PreferenciaService } from '../../service/preferencia.service';
   styleUrl: './registro.component.css',
   providers:[
     UsuarioService,
-    MessageService
+    MessageService,
+    NinoService
   ]
 })
 export class RegistroComponent implements OnInit{
   constructor(
     public messageService: MessageService,
-    private servicioUsuario: UsuarioService
+    private servicioUsuario: UsuarioService,
+    private servicioNino: NinoService
   ){}
   usuarios: Usuario = { 
     id: 0, 
     nombre: '', 
     correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
+    fechaNacimiento: new Date(2001, 0, 1),
     contrasena: '',
     genero: '',
     foto: ''
@@ -57,6 +62,10 @@ export class RegistroComponent implements OnInit{
   numArte: number = 50;
   numDeporte: number = 50;
   numPolitico: number = 50;
+
+  ninos: Nino[] | undefined
+  ninoSeleccionado: Nino | undefined
+  subscriptionNino: Subscription=new Subscription
 
   formGroup: FormGroup | undefined;
 
@@ -74,17 +83,27 @@ export class RegistroComponent implements OnInit{
       this.formGroup = new FormGroup({
           date: new FormControl<Date | null>(null)
       });
+      /*this.ninos = [
+        this.subscriptionNino = this.servicioNino.usuariosGet().subscribe({
+          next: (data: Array<Usuario>) => {
+            this.listaNino=data
+          },
+          error: (e) => {
+    
+          }
+        })
+      ]*/
   }
 
   crear(b:Boolean){
     if (b){
-        //this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
+        this.messageService.add({ severity: 'info', summary:'Crear usuario', detail:'En curso', life:3000});
   
         this.servicioUsuario.usuariosPost(this.usuarios).subscribe({
           next: (data: any) => {
        
             setTimeout(() => {
-              //this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
+              this.messageService.add({severity: 'success', summary:'Crear usuario', detail:'Completado', life:3000});
               this.usuarios.id = data.id
               this.usuarios.nombre= ''
               this.usuarios.correo= ''
@@ -95,9 +114,9 @@ export class RegistroComponent implements OnInit{
               window.location.reload() 
             });
           },
-          /*error: (error) => {
+          error: (error) => {
             this.messageService.add({severity: 'error', summary:'Crear usuario', detail:'Ha surguido un error al crear el usuario, inténtelo de nuevo', life:3000});
-          }*/
+          }
         });
     }
   }

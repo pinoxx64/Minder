@@ -9,9 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
+import { CalendarModule } from 'primeng/calendar';
+
 
 @Component({
   selector: 'app-editar-usuario',
@@ -23,11 +28,13 @@ import { UsuarioService } from '../../service/usuario.service';
     ButtonModule,
     InputTextModule,
     InputSwitchModule,
-    ConfirmComponent
+    ConfirmComponent,
+    CommonModule,
+    CalendarModule
   ],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css',
-  providers: [DialogService, MessageService, UsuarioService]
+  providers: [DialogService, MessageService, UsuarioService, NoopAnimationsModule]
 })
 export class EditarUsuarioComponent {
     constructor(
@@ -40,7 +47,7 @@ export class EditarUsuarioComponent {
     id: 0, 
     nombre: '', 
     correo: '', 
-    fechaNacimiento: new Date(1900, 0, 1),
+    fechaNacimiento: new Date(2001, 1, 1),
     contrasena: '',
     genero: '',
     foto: ''

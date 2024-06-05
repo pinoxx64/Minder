@@ -2,58 +2,37 @@
 
 <div class="card flex justify-content-center">
     @if (tipo==0) {
-        <p-button [raised]="true" [outlined]="true" (click)="showDialog()" [raised]="true" label="Registrar" icon="pi pi-pencil"></p-button>
+        <p-button [raised]="true" [outlined]="true" (click)="showDialog()" [raised]="true" label="Crear evento" icon="pi pi-pencil"></p-button>
     }
-    <p-dialog header="Registrarse" [(visible)]="visible" [modal]="true" 
-    [draggable]="false" (onHide)="cerrar()" [resizable]="false">
+    <p-dialog header="Nuevo evento" [(visible)]="visible" [modal]="true" 
+    [draggable]="false" (onHide)="cerrar()" [resizable]="false" [style]="{ width: '50rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
     <div class="card flex justify-content-center" class="custom-dialog">
         <div class="flex flex-row gap-4">
         
             <div class="flex flex-column">
-                <label for="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="nombre-help" [(ngModel)]="usuarios.nombre"/>
+                <label for="nombre">Nombre</label><br>
+                <input pInputText id="nombre" aria-describedby="eventname-help1" [(ngModel)]="eventos.nombre"/>
             </div>
+
+            <br>
 
             <div class="flex flex-column">
-                <label for="correo">Correo</label>
-                <input pInputText id="correo" aria-describedby="correo-help" [(ngModel)]="usuarios.correo"/>
+                <label for="fecha">Fecha del evento</label><br>
+                <p-calendar id="fecha" placeholder="MM/DD/YYYY" aria-describedby="eventname-help2" [(ngModel)]="eventos.fecha"/>
             </div>
+
+            <br>
 
             <div class="flex flex-column">
-                <label for="fecha">Fecha de Nacimiento</label>
-                <input pInputText id="fecha" placeholder="DD/MM/YYYY" aria-describedby="fecha" [(ngModel)]="usuarios.fechaNacimiento"/>
+                <label for="descrip">descrip</label><br>
+                <input pInputText id="descrip" aria-describedby="eventname-help3" [(ngModel)]="eventos.descrip"/>
             </div>
 
-            <div class="flex flex-column">
-                <label for="contrasena">Contraseña</label>
-                <input pInputText id="contrasena" aria-describedby="contrasena" [(ngModel)]="usuarios.contrasena"/>
-            </div>
+            <br>
 
-            <div class="flex flex-column">
-                <label for="genero">Genero</label>
-                <input pInputText id="genero" aria-describedby="genero" [(ngModel)]="usuarios.genero"/>
-            </div>
+            <!--Falta añadir el mapa-->
 
-            <div class="flex flex-column">
-                <label for="foto">Foto</label>
-                <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
-            </div>
-
-            <div class="flex flex-column"><!--Cambiar estos 3-->
-                <label for="numArte">Tipo de interes relacionado con el arte</label>
-                <input id="arte" type="text" pInputText [(ngModel)]="preferenzi" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numArte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numDeporte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numPolitico" class="w-full" />
-            </div>
         </div>
         <div style="margin-top: 20px;" >
             <app-confirm tipo="Crear" icono="plus" mensaje="¿Deseas crear este evento?" color="success" (confirmacion)="crear($event)"></app-confirm>

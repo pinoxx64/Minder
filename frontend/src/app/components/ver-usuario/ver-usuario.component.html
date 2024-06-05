@@ -15,7 +15,6 @@
                 <th style="width:12%">Nombre</th>
                 <th style="width:12%">Correo</th>
                 <th style="width:12%">Fecha de Nacimiento</th>
-                <th style="width:12%">Contraseña</th>
                 <th style="width:12%">Genero</th>
                 <th style="width:12%">Foto</th>
             </tr>
@@ -26,9 +25,8 @@
                 <td>{{usuarios.nombre}}</td>
                 <td>{{usuarios.correo}}</td>
                 <td>{{usuarios.fechaNacimiento}}</td>
-                <td>{{usuarios.contrasena}}</td>
                 <td>{{usuarios.genero}}</td>
-                <td>{{usuarios.foto}}</td>
+                <td><img src="../../../assets/{{usuarios.foto}}"></td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
