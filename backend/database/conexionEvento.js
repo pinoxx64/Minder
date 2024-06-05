@@ -37,10 +37,23 @@ class ConexionEvento {
         process.on('SIGINT', () => conn.close())
     }
 
+    getlistado = async() => {
+        let resultado = [];
+        this.conectar();
+        console.log(`Accediendo a los datos...`)
+        resultado = await models.evento.findAll({
+            attributes: ['id', 'nombre', 'fecha', 'descrip', 'latitud', 'longitud']
+          });
+        this.desconectar();
+        return resultado;
+    }
+
     getEvento = async(id) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.Evento.findByPk(id);
+        resultado = await models.evento.findByPk(id, {
+            attributes: ['id', 'nombre', 'fecha', 'descrip', 'latitud', 'longitud']
+        });
         this.desconectar();
         if (!resultado){
             throw error;
@@ -54,7 +67,7 @@ class ConexionEvento {
         try{
             // const usuarioNuevo = new Persona(body); //Con esto añade los timeStamps.
             // await usuarioNuevo.save();
-            const usuarioNuevo = await models.Evento.create(body);
+            const usuarioNuevo = await models.evento.create(body);
             resultado = 1; // Asume que la inserción fue exitosa
         } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
@@ -71,7 +84,9 @@ class ConexionEvento {
 
     modificarEvento = async(id, body) => {
         this.conectar();
-        let resultado = await models.Evento.findByPk(id);
+        let resultado = await models.evento.findByPk(id, {
+            attributes: ['id', 'nombre', 'fecha', 'descrip', 'latitud', 'longitud']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
@@ -83,7 +98,9 @@ class ConexionEvento {
 
     borrarEvento = async(id) => {
         this.conectar();
-        let resultado = await models.Evento.findByPk(id);
+        let resultado = await models.evento.findByPk(id, {
+            attributes: ['id', 'nombre', 'fecha', 'descrip', 'latitud', 'longitud']
+        });
         if (!resultado){
             this.desconectar();
             throw error;

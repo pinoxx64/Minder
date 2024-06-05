@@ -1,6 +1,20 @@
 const {response,request} = require('express');
 const Conexion = require('../database/ConexionEvento')
 
+const eventosGet =  (req, res = response) => {
+    const conx = new Conexion();
+
+    conx.getlistado()    
+        .then( msg => {
+            console.log('Listado correcto!');
+            res.status(200).json(msg);
+        })
+        .catch( err => {
+            console.log('No hay registros');
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        });
+}
+
 const eventoGet =  (req, res = response) => {
     const conx = new Conexion();
     
@@ -62,4 +76,5 @@ module.exports = {
     eventoPost,
     eventoPut,
     eventoGet,
+    eventosGet
 }

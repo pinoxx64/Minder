@@ -51,7 +51,9 @@ class ConexionUsuario {
     getUsuario = async(id) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.usuario.findByPk(id);
+        resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         this.desconectar();
         if (!resultado){
             throw error;
@@ -82,7 +84,9 @@ class ConexionUsuario {
 
     modificarUsuario = async(id, body) => {
         this.conectar();
-        let resultado = await models.usuario.findByPk(id);
+        let resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
@@ -94,7 +98,9 @@ class ConexionUsuario {
 
     borrarUsuario = async(id) => {
         this.conectar();
-        let resultado = await models.usuario.findByPk(id);
+        let resultado = await models.usuario.findByPk(id, {
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+        });
         if (!resultado){
             this.desconectar();
             throw error;
@@ -104,9 +110,9 @@ class ConexionUsuario {
         return resultado;
     }
 
-    getRolesUsuario = async(idU) => {
-        console.log(idU);
-        const userWithRoles = await models.usuario.findByPk(idU, {
+    getRolesUsuario = async(idUsuario) => {
+        console.log(idUsuario);
+        const userWithRoles = await models.usuario.findByPk(idUsuario, {
             include: [{
                 model: models.Rol,
                 as: 'roles',
@@ -121,6 +127,55 @@ class ConexionUsuario {
         });
         console.log(roles);
         return roles;
+    }
+
+    checkLogin = async (correo) => {
+
+        this.conectar();
+        let user = await models.user.findOne(({
+            where: {
+                correo
+            }
+        }));
+
+        this.desconectar();
+        if (!user) {
+            throw new Error('Email no registrado');
+        }
+
+        return user;
+    }
+
+    getRolUserId = async (idUsuario) => {
+        try {
+
+            let resultado = [];
+            this.conectar();
+            resultado = await models.user.findOne({
+                attributes: ['id','nombre','correo','createdAt','updatedAt'],
+                where: {
+                    id: {
+                        [Op.eq]: idUsuario
+                    }
+                },
+                include: [{
+                    model: models.usuariorol,
+                    as: 'usuariorol',
+                    include: [{
+                            model: models.rol,
+                            as: 'rol',
+                            attributes: ['nombre'],
+                        },
+
+                    ],
+                    attributes: ['id'],
+                }, ],
+            });
+            this.desconectar();
+            return resultado;
+        } catch (err) {
+            this.desconectar()
+        }
     }
 }
 

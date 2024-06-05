@@ -1,0 +1,37 @@
+<div style="margin-top: 40px;" class="card">
+    <p-table
+        [value]="listaEvento"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' ,'max-width':'80rem','margin':'auto'}"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} eventos"
+        [rowsPerPageOptions]="[5, 10, 20]"
+    >
+    
+        <ng-template pTemplate="header">
+            <tr class="header-glass" style="border: none;">
+                <th style="width:10%">¿Te apuntas?</th>
+                <th style="width:12%">Nombre</th>
+                <th style="width:12%">Fecha</th>
+                <th style="width:12%">Descripción</th>
+                <th style="width:12%">Lugar</th>
+            </tr>
+        </ng-template> 
+        <ng-template pTemplate="body" let-eventos>
+            <tr class="glass">
+                <td><app-apuntarse></app-apuntarse></td>
+                <td>{{eventos.nombre}}</td>
+                <td>{{eventos.fecha}}</td>
+                <td>{{eventos.descrip}}</td>
+                <!--Poner aqui el mapa-->
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>

@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.usuariorol,
         foreignKey: 'idUsuario',
         as: 'usuariorol'});*/
-        this.hasMany(models.usuario, {
+        /*this.hasMany(models.usuario, {
           foreignKey: 'idUsuario',
           as: 'usuariorol',
-        });
+        });*/
     }
   }
   usuario.init({
@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'usuario',
+    tableName: 'usuarios'
   });
   return usuario;
 };
