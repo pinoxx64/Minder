@@ -8,6 +8,8 @@ import { MessageService } from 'primeng/api';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
 import { DataViewModule } from 'primeng/dataview';
+import { CabeceraComponent } from '../cabecera/cabecera.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -18,7 +20,8 @@ import { DataViewModule } from 'primeng/dataview';
     RatingModule, 
     ButtonModule, 
     CommonModule,
-    DataViewModule
+    DataViewModule,
+    CabeceraComponent
   ],
   providers: [MessageService, UsuarioService],
   templateUrl: './inicio.component.html',
@@ -30,9 +33,17 @@ export class InicioComponent {
     private servicioUsuario: UsuarioService
   ){}
 
-  usuarios!: Usuario[]
+  subscriptionUsers: Subscription=new Subscription;
+  usuario:Array<Usuario>=[]
 
-  ngOnInit() {
-    this.servicioUsuario.usuarioAleatorioInteresante().then((usu) => (this.usuarios = usu.slice(0, 5)));
+  ngOnInit(): void{
+    this.subscriptionUsers = this.servicioUsuario.usuarioAleatorioInteresante().subscribe({
+      next: (data: Array<Usuario>) => {
+        this.usuario=data
+      },
+      error: (e) => {
+
+      }
+    })
   }
 }

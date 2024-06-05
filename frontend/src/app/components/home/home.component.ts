@@ -6,6 +6,7 @@ import { RippleModule } from 'primeng/ripple';
 import { EventoComponent } from '../evento/evento.component';
 import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 import { RegistroComponent } from '../registro/registro.component';
+import { InicioComponent } from '../inicio/inicio.component';
 //import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -20,7 +21,8 @@ import { RegistroComponent } from '../registro/registro.component';
     EventoComponent,
     VerUsuarioComponent,
     RegistroComponent,
-    //LoginComponent
+    //LoginComponent,
+    InicioComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
