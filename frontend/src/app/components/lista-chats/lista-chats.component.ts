@@ -44,7 +44,7 @@ import { ChatComponent } from '../chat/chat.component';
 })
 export class ListaChatsComponent {
   constructor(
-    private servicioUsuario: UsuarioService
+    private servicioUsuario: UsuarioService //tengo que hacerlo con lo del graphql
   ){}
   subscriptionUsers: Subscription=new Subscription;
   listaUsers:Array<Usuario>=[]

@@ -7,7 +7,7 @@ import { EventoComponent } from '../evento/evento.component';
 import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 import { RegistroComponent } from '../registro/registro.component';
 import { InicioComponent } from '../inicio/inicio.component';
-//import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,7 @@ import { InicioComponent } from '../inicio/inicio.component';
     EventoComponent,
     VerUsuarioComponent,
     RegistroComponent,
-    //LoginComponent,
+    LoginComponent,
     InicioComponent
   ],
   templateUrl: './home.component.html',
