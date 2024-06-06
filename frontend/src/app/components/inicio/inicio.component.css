@@ -1,0 +1,18 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%
+}
+.centro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+.persona{
+    display: flex;
+    justify-content:space-around;
+    align-items:end;
+    background-color: #ce0000;
+}

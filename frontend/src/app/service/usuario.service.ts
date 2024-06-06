@@ -11,6 +11,14 @@ export class UsuarioService{
     baseUrl = environment.baseUrl+environment.urlUsuario
     constructor(private http:HttpClient){}
 
+    usuarioAleatorioInteresante(): Observable<any  | undefined>{
+      return this.http.get<any>(this.baseUrl+'/ale').pipe(
+        catchError((error) =>{
+          return of(undefined)
+        })
+      )
+    }
+
     usuariosGet(): Observable<any  | undefined> {
         return this.http.get<any>(this.baseUrl).pipe(
           catchError((error) =>{
