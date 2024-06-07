@@ -8,6 +8,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/api';
 import { ConfirmComponent } from '../confirm/confirm.component';
 //import { GoogleMapsModule } from '@angular/google-maps';
+import { AgmCoreModule } from '@agm/core';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
@@ -22,7 +23,10 @@ import { EventoService } from '../../service/evento.service';
     ReactiveFormsModule, 
     CalendarModule,
     FormsModule,
-    ConfirmComponent
+    ConfirmComponent,
+    /*AgmCoreModule.forRoot({
+      apiKey: 
+    })*/
   ],
   templateUrl: './crear-evento.component.html',
   styleUrl: './crear-evento.component.css',
