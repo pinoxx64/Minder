@@ -31,7 +31,17 @@
 
             <br>
 
-            <!--Falta añadir el mapa-->
+            <div class="flex flex-column">
+                <label for="lugar">Lugar</label><br>
+                <google-map>
+                    <map-marker
+                    [position]="position"
+                    [label]="labelMapa"
+                    [title]="title">
+
+                    </map-marker>
+                </google-map>
+            </div>
 
         </div>
         <div style="margin-top: 20px;" >

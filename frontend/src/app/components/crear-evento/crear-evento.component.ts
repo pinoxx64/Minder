@@ -12,6 +12,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
+import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
@@ -24,6 +25,7 @@ import { EventoService } from '../../service/evento.service';
     CalendarModule,
     FormsModule,
     ConfirmComponent,
+    GoogleMapsModule
     /*AgmCoreModule.forRoot({
       apiKey: 
     })*/
@@ -58,7 +60,17 @@ export class CrearEventoComponent {
 
   formGroup: FormGroup | undefined;
 
+  position = {
+    lat: 0.0,
+    lng: 0.0
+  }
 
+  labelMapa = {
+    color: 'black',
+    text: 'Evento'
+  }
+
+  title = 'hola'
 
   //--------------------------------------------------------------------------------------
 
