@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ import { UsuarioService } from '../../service/usuario.service';
 })
 export class LoginComponent {
   constructor(
-
+    private servicioAuth: AuthService
   ){}
   @Output() cerrarModal = new EventEmitter<void>();
   @Output() logged = new EventEmitter<boolean>();
@@ -40,7 +41,6 @@ export class LoginComponent {
   error:string | null=null
   
   cerrar(): void {
-    //this.register=false
     this.cerrarModal.emit();
   }
     showDialog() {
@@ -53,6 +53,7 @@ export class LoginComponent {
       sessionStorage.setItem('token',data.token)
       this.servicioAuth.loginOn()
       this.visible=false
+      window.location.href="../inicio"
     },
     error:(err)=>{
       this.logged.emit(false)

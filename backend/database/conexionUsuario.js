@@ -48,6 +48,17 @@ class ConexionUsuario {
         return resultado;
     }
 
+    getUsuarioAleInte = async() => {
+        let resultado = [];
+        this.conectar();
+        console.log(`Accediendo a los datos...`)
+        resultado = await models.usuario.findAll({
+            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
+          });
+        this.desconectar();
+        return resultado;
+    }
+
     getUsuario = async(id) => {
         let resultado = [];
         this.conectar();
@@ -132,7 +143,8 @@ class ConexionUsuario {
     checkLogin = async (correo) => {
 
         this.conectar();
-        let user = await models.user.findOne(({
+        let user = await models.usuario.findOne(({
+            attributes:['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto'],  
             where: {
                 correo
             }
@@ -151,7 +163,7 @@ class ConexionUsuario {
 
             let resultado = [];
             this.conectar();
-            resultado = await models.user.findOne({
+            resultado = await models.usuario.findOne({
                 attributes: ['id','nombre','correo','createdAt','updatedAt'],
                 where: {
                     id: {

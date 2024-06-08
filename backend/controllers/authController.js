@@ -8,21 +8,21 @@ const login =  (req, res = response) => {
     const {correo, contrasena} = req.body;
     try{
         const conx = new Conexion();
-        u = conx.checkLogin(correo)    
+        u = conx.checkLogin(correo) 
             .then( usu => {
-              
                 bcrypt.compare(contrasena, usu.contrasena, (err, result) => {
                     if (result) {
-                        conx.getRolUserId(usu.id)
+                        /*conx.getRolUserId(usu.id)
                         .then(roles=>{
                             let r=[]
                             for(let i=0;i<roles.usuariorol.length;i++){
                                 r.push(roles.usuariorol[i].rol.nombre)
                             }
-                            const token = generarJWT(usu.id,r,usu.nombre)
-                            res.status(200).json({token});
+                            
                 
-                        })
+                        })*/
+                        const token = generarJWT(usu.id,usu.nombre)
+                            res.status(200).json({token});
                     } else {
                         
                         res.status(500).json({'msg':'La contraseña no es válida.'});

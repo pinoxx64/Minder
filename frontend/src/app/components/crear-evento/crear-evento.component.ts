@@ -8,9 +8,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/api';
 import { ConfirmComponent } from '../confirm/confirm.component';
 //import { GoogleMapsModule } from '@angular/google-maps';
+import { AgmCoreModule } from '@agm/core';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
+import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
@@ -22,7 +24,11 @@ import { EventoService } from '../../service/evento.service';
     ReactiveFormsModule, 
     CalendarModule,
     FormsModule,
-    ConfirmComponent
+    ConfirmComponent,
+    GoogleMapsModule
+    /*AgmCoreModule.forRoot({
+      apiKey: 
+    })*/
   ],
   templateUrl: './crear-evento.component.html',
   styleUrl: './crear-evento.component.css',
@@ -54,7 +60,17 @@ export class CrearEventoComponent {
 
   formGroup: FormGroup | undefined;
 
+  position = {
+    lat: 0.0,
+    lng: 0.0
+  }
 
+  labelMapa = {
+    color: 'black',
+    text: 'Evento'
+  }
+
+  title = 'hola'
 
   //--------------------------------------------------------------------------------------
 
