@@ -3,5 +3,8 @@ export interface Preferencia{
     idUsuario:number,
     deporte:number,
     arte: number,
-    politico: number
+    politico: number,
+    idTipo: number,
+    idInteres: number,
+    idNinos: number
 }

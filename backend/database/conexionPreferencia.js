@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Sequelize, Op } = require('sequelize');
+const { Sequelize, Op, where } = require('sequelize');
 const models = require('../models/index.js'); //Esto tiene acceso a todos los modelos.
 
 class ConexionPreferencia {
@@ -37,10 +37,26 @@ class ConexionPreferencia {
         process.on('SIGINT', () => conn.close())
     }
 
-    getPreferencia = async(id) => {
+    getlistado = async() => {
         let resultado = [];
         this.conectar();
-        resultado = await models.Preferencia.findByPk(id);
+        console.log(`Accediendo a los datos...`)
+        resultado = await models.usuario.findAll({
+            attributes: ['id', 'idUsuario', 'deporte', 'arte', 'politico', 'idTipo', 'idInteres', 'idNinos']
+          });
+        this.desconectar();
+        return resultado;
+    }
+
+    getPreferencia = async(idUsuario) => {
+        let resultado = [];
+        this.conectar();
+        resultado = await models.Preferencia.findOne({
+            where:{
+                idUsuario:idUsuario
+            },
+            attributes: ['id', 'idUsuario', 'deporte', 'arte', 'politico', 'idTipo', 'idInteres', 'idNinos']
+        });
         this.desconectar();
         if (!resultado){
             throw error;
