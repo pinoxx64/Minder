@@ -41,10 +41,12 @@ export class InicioComponent {
 
   subscriptionUsers: Subscription=new Subscription;
   subscriptionPreferencia: Subscription=new Subscription;
+  ale!: number
   usuario!: Usuario
   preferencias!: Array<Preferencia>
   preferenciaUsuario!: Preferencia
-  usuariosInteresantes!: Array<Number>
+  usuariosInteresantes!: Array<number>
+  usuarioBuscado!: Usuario
 
   ngOnInit(): void{
     // con la id del usuario buscar un usuario con las preferencias similares
@@ -76,27 +78,39 @@ export class InicioComponent {
     })
 
     for (let i = 0; i < this.preferencias.length; i++) {
-      if (this.preferenciaUsuario.arte>=(this.preferencias[i].arte-10)||this.preferencias[i].arte<(this.preferencias[i].arte+10)) {
-        if (this.preferenciaUsuario.deporte>=(this.preferencias[i].deporte-10)||this.preferenciaUsuario.deporte<(this.preferencias[i].deporte+10)) {
-          if (this.preferenciaUsuario.politico>=(this.preferencias[i].politico-10)||this.preferenciaUsuario.politico<(this.preferencias[i].politico+10)) {
-            if (this.preferenciaUsuario.idTipo==this.preferencias[i].idTipo) {
-              if (this.preferenciaUsuario.idInteres==this.preferencias[i].idInteres) {
-                if (this.preferenciaUsuario.idNinos==this.preferencias[i].idNinos) {
-                  this.usuariosInteresantes.push(this.preferencias[i].idUsuario)
-                }
-              }
-            }
-          }
-        }
+      if (
+        this.preferenciaUsuario.arte >= (this.preferencias[i].arte - 10) && this.preferenciaUsuario.arte <= (this.preferencias[i].arte + 10) &&
+        this.preferenciaUsuario.deporte >= (this.preferencias[i].deporte - 10) && this.preferenciaUsuario.deporte <= (this.preferencias[i].deporte + 10) &&
+        this.preferenciaUsuario.politico >= (this.preferencias[i].politico - 10) && this.preferenciaUsuario.politico <= (this.preferencias[i].politico + 10) &&
+        this.preferenciaUsuario.idTipo == this.preferencias[i].idTipo &&
+        this.preferenciaUsuario.idInteres == this.preferencias[i].idInteres &&
+        this.preferenciaUsuario.idNinos == this.preferencias[i].idNinos
+      ) {
+        this.usuariosInteresantes.push(this.preferencias[i].idUsuario);
       }
     }
 
+    if (this.usuariosInteresantes.length > 0) {
+      this.ale = Math.floor(Math.random() * this.usuariosInteresantes.length);
+      this.subscriptionUsers = this.servicioUsuario.usuarioGet(this.usuariosInteresantes[this.ale]).subscribe({
+        next: (data: Usuario) => {
+          this.usuarioBuscado = data;
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      });
+    } else {
+      console.error('No hay usuarios interesantes disponibles.');
+    }
     
   }
   like():void{
     // si acepta lo añade a la lista de amigos, si no se espera y de cualquier manera carga otro usuario
+    window.location.reload()
   }
   dislike():void{
     // carga otro usuario
+    window.location.reload()
   }
 }

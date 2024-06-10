@@ -15,20 +15,6 @@ const usuariosGet =  (req, res = response) => {
         });
 }
 
-const usuarioAleatorioInteresanteGet =  (req, res = response) => {
-    const conx = new Conexion();
-
-    conx.getUsuarioAleInte()    
-        .then( msg => {
-            console.log('Listado correcto!');
-            res.status(200).json(msg);
-        })
-        .catch( err => {
-            console.log('No hay registros');
-            res.status(203).json({'msg':'No se han encontrado registros'});
-        });
-}
-
 const usuarioGet =  (req, res = response) => {
     const conx = new Conexion();
     

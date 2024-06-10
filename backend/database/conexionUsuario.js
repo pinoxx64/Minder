@@ -48,17 +48,6 @@ class ConexionUsuario {
         return resultado;
     }
 
-    getUsuarioAleInte = async() => {
-        let resultado = [];
-        this.conectar();
-        console.log(`Accediendo a los datos...`)
-        resultado = await models.usuario.findAll({
-            attributes: ['id', 'nombre', 'correo', 'fechaNacimiento', 'contrasena', 'genero', 'foto']
-          });
-        this.desconectar();
-        return resultado;
-    }
-
     getUsuario = async(id) => {
         let resultado = [];
         this.conectar();

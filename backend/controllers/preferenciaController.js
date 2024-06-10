@@ -18,7 +18,7 @@ const preferenciaGet =  (req, res = response) => {
 const preferenciaPost =  (req = request, res = response) => {
     const conx = new Conexion();
         
-    conx.registrarRol(req.body)    
+    conx.registrarPreferencia(req.body)    
         .then( msg => {
             console.log('Insertado correctamente!');
             res.status(201).json(msg);
