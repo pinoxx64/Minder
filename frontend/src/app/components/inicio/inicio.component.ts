@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output } from '@angular/core';
+import { Subscription, forkJoin } from 'rxjs';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
@@ -7,7 +8,6 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { DataViewModule } from 'primeng/dataview';
 import { CabeceraComponent } from '../cabecera/cabecera.component';
-import { Subscription } from 'rxjs';
 
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
@@ -29,9 +29,9 @@ import { AuthService } from '../../service/auth.service';
   ],
   providers: [MessageService, UsuarioService],
   templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css'
+  styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent {
+export class InicioComponent implements OnInit, OnDestroy {
   constructor(
     public messageService: MessageService,
     private servicioUsuario: UsuarioService,
@@ -39,44 +39,43 @@ export class InicioComponent {
     private servicioAuth: AuthService
   ){}
 
-  subscriptionUsers: Subscription=new Subscription;
-  subscriptionPreferencia: Subscription=new Subscription;
-  ale!: number
-  usuario!: Usuario
-  preferencias!: Array<Preferencia>
-  preferenciaUsuario!: Preferencia
-  usuariosInteresantes!: Array<number>
-  usuarioBuscado!: Usuario
+  subscription: Subscription = new Subscription();
+  ale!: number;
+  usuario!: Usuario;
+  preferencias!: Array<Preferencia>;
+  preferenciaUsuario!: Preferencia;
+  usuariosInteresantes: Array<number> = [];
+  usuarioBuscado!: Usuario;
+  numId!: number;
 
-  ngOnInit(): void{
-    // con la id del usuario buscar un usuario con las preferencias similares
-    this.subscriptionUsers = this.servicioUsuario.usuarioGet(this.servicioAuth.getUid()).subscribe({
-      next: (data:Usuario) => {
-        this.usuario=data
+  ngOnInit(): void {
+    this.numId = this.servicioAuth.getUid();
+    
+    const usuario$ = this.servicioUsuario.usuarioGet(this.numId);
+    const preferencias$ = this.servicioPreferencia.preferenciasGet();
+    const preferenciaUsuario$ = this.servicioPreferencia.preferenciaGet(this.numId);
+
+    this.subscription = forkJoin([usuario$, preferencias$, preferenciaUsuario$]).subscribe({
+      next: ([usuarioData, preferenciasData, preferenciaUsuarioData]) => {
+        this.usuario = usuarioData;
+        this.preferencias = preferenciasData;
+        this.preferenciaUsuario = preferenciaUsuarioData;
+        this.filtrarUsuariosInteresantes();
+        this.cargarUsuarioAleatorio();
       },
       error: (e) => {
-
+        console.error(e);
       }
-    })
+    });
+  }
 
-    this.subscriptionPreferencia = this.servicioPreferencia.preferenciasGet().subscribe({
-      next: (data:Array<Preferencia>) => {
-        this.preferencias=data
-      },
-      error: (e) => {
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
-      }
-    })
-
-    this.subscriptionPreferencia = this.servicioPreferencia.preferenciaGet(this.servicioAuth.getUid()).subscribe({
-      next: (data:Preferencia) => {
-        this.preferenciaUsuario=data
-      },
-      error: (e) => {
-
-      }
-    })
-
+  filtrarUsuariosInteresantes(): void {
     for (let i = 0; i < this.preferencias.length; i++) {
       if (
         this.preferenciaUsuario.arte >= (this.preferencias[i].arte - 10) && this.preferenciaUsuario.arte <= (this.preferencias[i].arte + 10) &&
@@ -89,10 +88,13 @@ export class InicioComponent {
         this.usuariosInteresantes.push(this.preferencias[i].idUsuario);
       }
     }
+    console.log(this.usuariosInteresantes);
+  }
 
+  cargarUsuarioAleatorio(): void {
     if (this.usuariosInteresantes.length > 0) {
       this.ale = Math.floor(Math.random() * this.usuariosInteresantes.length);
-      this.subscriptionUsers = this.servicioUsuario.usuarioGet(this.usuariosInteresantes[this.ale]).subscribe({
+      this.subscription = this.servicioUsuario.usuarioGet(this.usuariosInteresantes[this.ale]).subscribe({
         next: (data: Usuario) => {
           this.usuarioBuscado = data;
         },
@@ -103,14 +105,14 @@ export class InicioComponent {
     } else {
       console.error('No hay usuarios interesantes disponibles.');
     }
-    
   }
-  like():void{
+
+  like(): void {
     // si acepta lo añade a la lista de amigos, si no se espera y de cualquier manera carga otro usuario
-    window.location.reload()
+    window.location.reload();
   }
-  dislike():void{
-    // carga otro usuario
-    window.location.reload()
+
+  dislike(): void {
+    window.location.reload();
   }
 }

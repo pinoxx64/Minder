@@ -41,7 +41,7 @@ class ConexionPreferencia {
         let resultado = [];
         this.conectar();
         console.log(`Accediendo a los datos...`)
-        resultado = await models.usuario.findAll({
+        resultado = await models.preferencia.findAll({
             attributes: ['id', 'idUsuario', 'deporte', 'arte', 'politico', 'idTipo', 'idInteres', 'idNinos']
           });
         this.desconectar();
@@ -51,7 +51,7 @@ class ConexionPreferencia {
     getPreferencia = async(idUsuario) => {
         let resultado = [];
         this.conectar();
-        resultado = await models.Preferencia.findOne({
+        resultado = await models.preferencia.findOne({
             where:{
                 idUsuario:idUsuario
             },
@@ -70,7 +70,7 @@ class ConexionPreferencia {
         try{
             // const usuarioNuevo = new Persona(body); //Con esto añade los timeStamps.
             // await usuarioNuevo.save();
-            const usuarioNuevo = await models.Preferencia.create(body);
+            const usuarioNuevo = await models.preferencia.create(body);
             resultado = 1; // Asume que la inserción fue exitosa
         } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
@@ -87,7 +87,7 @@ class ConexionPreferencia {
 
     modificarPreferencia = async(id, body) => {
         this.conectar();
-        let resultado = await models.Preferencia.findByPk(id);
+        let resultado = await models.preferencia.findByPk(id);
         if (!resultado){
             this.desconectar();
             throw error;
@@ -99,7 +99,7 @@ class ConexionPreferencia {
 
     borrarPreferencia = async(id) => {
         this.conectar();
-        let resultado = await models.Preferencia.findByPk(id);
+        let resultado = await models.preferencia.findByPk(id);
         if (!resultado){
             this.desconectar();
             throw error;
