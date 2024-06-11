@@ -1,4 +1,4 @@
-//Arreglar al crearlo añadir la idUsuario
+//Arreglar al crearlo añadir la idUsuario, mi idea es crear otro model para las preferencias
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
