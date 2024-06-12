@@ -62,15 +62,17 @@ export class LoginComponent {
       this.subscriptionPreferencia = this.servicioPreferencia.preferenciaGet(this.servicioAuth.getUid()).subscribe({
         next: (data: Preferencia) => {
           this.preferencia=data
+          try{
+
+            if(this.preferencia.idUsuario===this.servicioAuth.getUid()){
+              window.location.href="../inicio"
+            }
+          }catch(error){
+            window.location.href="../crearPreferencia"
+          }
         }
       })
-      try{
-        if(this.preferencia.idUsuario==this.servicioAuth.getUid()){
-          window.location.href="../inicio"
-        }
-      }catch(error){
-        window.location.href="../crearPreferencia"
-      }
+
     },
     error:(err)=>{
       this.logged.emit(false)

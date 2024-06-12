@@ -1,3 +1,4 @@
+//aqui faltan detalles, como saber si ya le ha dado like y poner bien lo del interes
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { TableModule } from 'primeng/table';
@@ -83,7 +84,8 @@ export class InicioComponent implements OnInit, OnDestroy {
         this.preferenciaUsuario.politico >= (this.preferencias[i].politico - 10) && this.preferenciaUsuario.politico <= (this.preferencias[i].politico + 10) &&
         this.preferenciaUsuario.idTipo == this.preferencias[i].idTipo &&
         this.preferenciaUsuario.idInteres == this.preferencias[i].idInteres &&
-        this.preferenciaUsuario.idNinos == this.preferencias[i].idNinos
+        this.preferenciaUsuario.idNinos == this.preferencias[i].idNinos &&
+        this.preferenciaUsuario.idUsuario != this.preferencias[i].idUsuario
       ) {
         this.usuariosInteresantes.push(this.preferencias[i].idUsuario);
       }

@@ -30,8 +30,15 @@
                 <label for="eventname4">Descripción</label><br>
                 <input pInputText id="descrip" aria-describedby="eventname-help4" [(ngModel)]="eventos.descrip" />
             </div>
+            
+            <br>
 
-            <!--Aqui va el mapa-->
+            <div class="map-container">
+                <label for="eventname5">Lugar</label><br>
+                <google-map [center]="{ lat: latitude, lng: longitude }" [zoom]="zoom" (mapClick)="onMapClick($event)">
+                    <map-marker [position]="{ lat: latitude, lng: longitude }"></map-marker>
+                </google-map>
+            </div>
 
         </div>
         </div>
