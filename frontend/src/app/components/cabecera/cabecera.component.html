@@ -3,8 +3,8 @@
     <p-button type="button" styleClass="p-button-text" label="Amigos" [rounded]="true"/>
     <p-button type="button" styleClass="p-button-text" label="Eventos" [rounded]="true"/>
     <p-button type="button" styleClass="p-button-text" label="Inicio" [rounded]="true"/>
-    <!--@if (admin==1) { Esto tengo que retocarlo
+    @if (servicioAuth.getRoles()=="admin") { 
         <p-button type="button" styleClass="p-button-text" label="Usuarios" [rounded]="true"/>
-    }-->
+    }
 </div>
  

@@ -11,15 +11,15 @@
     </header>
     <main>
             <div class="persona">
-            <!--<img src="../../../assets/{{usuario.foto}}"/>-->
+            <img src="../../../assets/{{usuarioBuscado.foto}}"/>
                 <div class="like">
-                    <p-button icon="pi pi-heart" [outlined]="true" />
+                    <p-button icon="pi pi-heart" (click)="like()" [outlined]="true" />
                 </div>
                 <div class="nombre">
-                    Prueba
+                    {{usuarioBuscado.nombre}}
                 </div>
                 <div class="dislike">
-                    <p-button icon="pi pi-arrow-right" [outlined]="true" />
+                    <p-button icon="pi pi-arrow-right" (click)="dislike()"[outlined]="true" />
                 </div>
             </div>
     </main>
