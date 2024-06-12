@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { accesoGuard } from './guards/acceso.guard';
 import { VistaEventoComponent } from './components/vista-evento/vista-evento.component';
+import { CrearPreferenciaComponent } from './components/crear-preferencia/crear-preferencia.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/presentacion', pathMatch: 'full'},
@@ -16,9 +17,10 @@ export const routes: Routes = [
     {path: 'inicio', component:InicioComponent},
     {path: 'evento', component:EventoComponent},
     {path: 'usuario',component:VerUsuarioComponent/*,
-canActivate: [accesoGuard], data: {rol: ['Administrador']}*/},
+canActivate: [accesoGuard], data: {rol: ['Admin']}*/},
     {path: 'listaChats', component:ListaChatsComponent},
     {path: 'chat', component:ChatComponent},
-    {path: 'eventoUsuario', component:VistaEventoComponent}
+    {path: 'eventoUsuario', component:VistaEventoComponent},
+    {path: 'crearPreferencia', component:CrearPreferenciaComponent}
 
 ];
