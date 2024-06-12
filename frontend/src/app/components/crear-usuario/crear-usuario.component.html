@@ -47,18 +47,33 @@
             </div>
 
             <div class="flex flex-column"><!--Cambiar estos 3-->
-                <input id="arte" type="text" pInputText [(ngModel)]="numArte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numArte" class="w-full" />
+                <label for="arte">Arte</label>
+                <input pInputText id="arte" aria-describedby="arte" [(ngModel)]="preferencias.arte"/>
             </div>
 
             <div class="flex flex-column">
-                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numDeporte" class="w-full" />
+                <label for="deporte">Deporte</label>
+                <input pInputText id="deporte" aria-describedby="deporte" [(ngModel)]="preferencias.deporte"/>
             </div>
 
             <div class="flex flex-column">
-                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numPolitico" class="w-full" />
+                <label for="politicio">Politico</label>
+                <input pInputText id="politicio" aria-describedby="politicio" [(ngModel)]="preferencias.politico"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="idTipo">Tipo</label>
+                <input pInputText id="tipo" aria-describedby="tipo" [(ngModel)]="preferencias.idTipo"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="idInteres">Interes</label>
+                <input pInputText id="interes" aria-describedby="interes" [(ngModel)]="preferencias.idInteres"/>
+            </div>
+
+            <div class="flex flex-column">
+                <label for="idNinos">Ninos</label>
+                <input pInputText id="ninos" aria-describedby="ninos" [(ngModel)]="preferencias.idNinos"/>
             </div>
         </div>
         <div style="margin-top: 20px;" >

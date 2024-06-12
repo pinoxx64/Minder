@@ -1,10 +1,10 @@
 const {response,request} = require('express');
-const Conexion = require('../database/ConexionPreferencia')
+const Conexion = require('../database/conexionPreferencia')
 
 const preferenciaGet =  (req, res = response) => {
     const conx = new Conexion();
     
-    conx.getPreferencia(req.params.id)    
+    conx.getPreferencia(req.params.idUsuario)    
         .then( msg => {
             console.log('Listado correcto!');
             res.status(200).json(msg);
@@ -18,7 +18,7 @@ const preferenciaGet =  (req, res = response) => {
 const preferenciaPost =  (req = request, res = response) => {
     const conx = new Conexion();
         
-    conx.registrarRol(req.body)    
+    conx.registrarPreferencia(req.body)    
         .then( msg => {
             console.log('Insertado correctamente!');
             res.status(201).json(msg);
@@ -57,9 +57,24 @@ const preferenciaPut =  (req, res = response) => {
         });
 }
 
+const prefereciasGet = (req, res = response) => {
+    const conx = new Conexion();
+    
+    conx.getlistado()    
+        .then( msg => {
+            console.log('Listado correcto!');
+            res.status(200).json(msg);
+        })
+        .catch( err => {
+            console.log('No hay registros');
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        });
+}
+
 module.exports = {
     preferenciaDelete,
     preferenciaPost,
     preferenciaPut,
     preferenciaGet,
+    prefereciasGet
 }

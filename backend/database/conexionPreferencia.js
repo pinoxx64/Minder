@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Sequelize, Op } = require('sequelize');
+const { Sequelize, Op, where } = require('sequelize');
 const models = require('../models/index.js'); //Esto tiene acceso a todos los modelos.
 
 class ConexionPreferencia {
@@ -37,10 +37,26 @@ class ConexionPreferencia {
         process.on('SIGINT', () => conn.close())
     }
 
-    getPreferencia = async(id) => {
+    getlistado = async() => {
         let resultado = [];
         this.conectar();
-        resultado = await models.Preferencia.findByPk(id);
+        console.log(`Accediendo a los datos...`)
+        resultado = await models.preferencia.findAll({
+            attributes: ['id', 'idUsuario', 'deporte', 'arte', 'politico', 'idTipo', 'idInteres', 'idNinos']
+          });
+        this.desconectar();
+        return resultado;
+    }
+
+    getPreferencia = async(idUsuario) => {
+        let resultado = [];
+        this.conectar();
+        resultado = await models.preferencia.findOne({
+            where:{
+                idUsuario:idUsuario
+            },
+            attributes: ['id', 'idUsuario', 'deporte', 'arte', 'politico', 'idTipo', 'idInteres', 'idNinos']
+        });
         this.desconectar();
         if (!resultado){
             throw error;
@@ -54,7 +70,7 @@ class ConexionPreferencia {
         try{
             // const usuarioNuevo = new Persona(body); //Con esto añade los timeStamps.
             // await usuarioNuevo.save();
-            const usuarioNuevo = await models.Preferencia.create(body);
+            const usuarioNuevo = await models.preferencia.create(body);
             resultado = 1; // Asume que la inserción fue exitosa
         } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
@@ -71,7 +87,7 @@ class ConexionPreferencia {
 
     modificarPreferencia = async(id, body) => {
         this.conectar();
-        let resultado = await models.Preferencia.findByPk(id);
+        let resultado = await models.preferencia.findByPk(id);
         if (!resultado){
             this.desconectar();
             throw error;
@@ -83,7 +99,7 @@ class ConexionPreferencia {
 
     borrarPreferencia = async(id) => {
         this.conectar();
-        let resultado = await models.Preferencia.findByPk(id);
+        let resultado = await models.preferencia.findByPk(id);
         if (!resultado){
             this.desconectar();
             throw error;
