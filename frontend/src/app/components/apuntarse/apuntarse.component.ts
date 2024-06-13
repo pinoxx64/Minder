@@ -6,11 +6,12 @@ import { ToastModule } from 'primeng/toast';
 import { UsuarioEventoService } from '../../service/usuarioEvento.service';
 import { UsuarioEvento } from '../../interface/usuarioEvento';
 import { AuthService } from '../../service/auth.service';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-apuntarse',
   standalone: true,
-  imports: [ConfirmDialogModule,ToastModule],
+  imports: [ConfirmDialogModule,ToastModule, ConfirmComponent],
   templateUrl: './apuntarse.component.html',
   styleUrl: './apuntarse.component.css',
   providers: [ConfirmationService, MessageService]
