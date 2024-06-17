@@ -36,14 +36,13 @@
             </div>
 
             <div class="flex flex-column"><!--Esto hay que cambiarlo para que sea con un boton de subir fotos-->
-                <label for="foto">Foto</label>
-                <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
-                <!--<label for="fotoCartel">Foto de cartel</label><br><br>
+                <!--<label for="foto">Foto</label>
+                <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>-->
+                <label for="foto">Foto</label><br><br>
                     <input #archivo type="file" id="archivo" class="form-control" accept="image/*" (change)="uplodadFoto($event)" ><br>
                     @if(fotoPreview){
                         <p-button (onClick)="limpiarFoto(archivo)">Limpiar</p-button>
                     }
-                <small id="fotoCartel">Sube la foto del cartel del nuevo evento</small><br>-->
             </div>
         </div>
         <div style="margin-top: 20px;" >

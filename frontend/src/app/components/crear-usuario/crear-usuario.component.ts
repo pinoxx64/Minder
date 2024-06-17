@@ -70,6 +70,8 @@ export class CrearUsuarioComponent {
   formularioFoto: FormData | null = null
   fotoPreview: string | null = null
 
+  file: any
+
   //--------------------------------------------------------------------------------------
 
   showDialog() {
@@ -87,11 +89,11 @@ export class CrearUsuarioComponent {
   }
 
   uplodadFoto(event: any) {
-    const file = event.target.files[0]
-    if (file) {
+    this.file = event.target.files[0]
+    if (this.file) {
       this.formularioFoto = new FormData()
-      this.formularioFoto.append('archivo', file)
-      this.fotoPreview = URL.createObjectURL(file);
+      this.formularioFoto.append('archivo', this.file)
+      this.fotoPreview = URL.createObjectURL(this.file);
       
     } else {
       this.formularioFoto = null
@@ -118,8 +120,8 @@ export class CrearUsuarioComponent {
               this.usuarios.fechaNacimiento= new Date(2001, 0, 1)
               this.usuarios.contrasena= ''
               this.usuarios.genero= ''
-              this.usuarios.foto= '' 
-              window.location.reload()
+              this.usuarios.foto= this.file.name
+              //window.location.reload()
             });
           },
           error: (error) => {
