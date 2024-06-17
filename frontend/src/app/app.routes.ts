@@ -1,3 +1,4 @@
+//Arreglar el Guard
 import { Routes } from '@angular/router';
 
 import { ChatComponent } from './components/chat/chat.component';
@@ -12,12 +13,12 @@ import { VistaEventoComponent } from './components/vista-evento/vista-evento.com
 import { CrearPreferenciaComponent } from './components/crear-preferencia/crear-preferencia.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: '/presentacion', pathMatch: 'full'},
+    {path: '', redirectTo: '/inicio', pathMatch: 'full'},
     {path: 'presentacion', component:HomeComponent},
     {path: 'inicio', component:InicioComponent},
     {path: 'evento', component:EventoComponent},
     {path: 'usuario',component:VerUsuarioComponent/*,
-canActivate: [accesoGuard], data: {rol: ['Admin']}*/},
+canActivate: [accesoGuard], data: {rol: ['administrador']}*/},
     {path: 'listaChats', component:ListaChatsComponent},
     {path: 'chat', component:ChatComponent},
     {path: 'eventoUsuario', component:VistaEventoComponent},
