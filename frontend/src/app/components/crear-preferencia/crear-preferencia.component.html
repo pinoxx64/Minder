@@ -1,0 +1,35 @@
+<div class="card flex justify-content-center">
+    <div class="flex flex-column"><!--Cambiar estos 3-->
+        <label for="arte">Arte</label>
+        <input pInputText id="arte" aria-describedby="arte" [(ngModel)]="preferencias.arte"/>
+    </div>
+    
+    <div class="flex flex-column">
+        <label for="deporte">Deporte</label>
+        <input pInputText id="deporte" aria-describedby="deporte" [(ngModel)]="preferencias.deporte"/>
+    </div>
+    
+    <div class="flex flex-column">
+        <label for="politicio">Politico</label>
+        <input pInputText id="politicio" aria-describedby="politicio" [(ngModel)]="preferencias.politico"/>
+    </div>
+    
+    <div class="flex flex-column">
+        <label for="idTipo">Tipo</label>
+        <input pInputText id="tipo" aria-describedby="tipo" [(ngModel)]="preferencias.idTipo"/>
+    </div>
+    
+    <div class="flex flex-column">
+        <label for="idInteres">Interes</label>
+        <input pInputText id="interes" aria-describedby="interes" [(ngModel)]="preferencias.idInteres"/>
+    </div>
+    
+    <div class="flex flex-column">
+        <label for="idNinos">Ninos</label>
+        <input pInputText id="ninos" aria-describedby="ninos" [(ngModel)]="preferencias.idNinos"/>
+    </div>
+
+    <div style="margin-top: 20px;" >
+        <app-confirm tipo="Crear" icono="plus" mensaje="¿Deseas crear este evento?" color="success" (confirmacion)="crear($event)"></app-confirm>
+    </div>
+</div>

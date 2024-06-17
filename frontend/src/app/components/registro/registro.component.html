@@ -40,39 +40,6 @@
                 <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
             </div>
 
-            <div class="flex flex-column"><!--Cambiar estos 3-->
-                <label for="foto">Tu interes en el arte:</label><br>
-                <input id="arte" type="text" pInputText [(ngModel)]="numArte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numArte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <label for="foto">Tu interes en el deporte:</label><br>
-                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numDeporte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <label for="foto">Tu interes en la politica:</label><br>
-                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numPolitico" class="w-full" />
-            </div>
-
-            <!--<div class="flex flex-column">
-                <label for="foto">Referente a los niños...</label><br>
-                <p-dropdown [options]="ninos" [(ngModel)]="ninoSeleccionado" optionLabel="name" placeholder="Selecciona un interes"/>
-            </div>
-
-            <div class="flex flex-column">
-                <label for="foto">Referente al tipo de relacion...</label><br>
-                <p-dropdown [options]="tipoRelacion" [(ngModel)]="tipoRelacionSeleccionado" optionLabel="name" placeholder="Selecciona un interes"/>
-            </div>
-
-            <div class="flex flex-column">
-                <label for="foto">Referente a tus intereses...</label><br>
-                <p-dropdown [options]="interes" [(ngModel)]="interesSeleccionado" optionLabel="name" placeholder="Selecciona un interes"/>
-            </div>-->
-
         </div>
         <div style="margin-top: 20px;" >
             <app-confirm tipo="Crear" icono="plus" mensaje="¿Deseas crear este evento?" color="success" (confirmacion)="crear($event)"></app-confirm>

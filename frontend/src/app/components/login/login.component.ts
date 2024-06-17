@@ -11,6 +11,9 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
 import { AuthService } from '../../service/auth.service';
+import { PreferenciaService } from '../../service/preferencia.service';
+import { Subscription } from 'rxjs';
+import { Preferencia } from '../../interface/preferencia';
 
 
 @Component({
@@ -31,8 +34,11 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginComponent {
   constructor(
-    private servicioAuth: AuthService
+    private servicioAuth: AuthService,
+    private servicioPreferencia: PreferenciaService
   ){}
+  subscriptionPreferencia: Subscription=new Subscription;
+  preferencia!: Preferencia
   @Output() cerrarModal = new EventEmitter<void>();
   @Output() logged = new EventEmitter<boolean>();
   @Input() visible: boolean = false;
@@ -53,7 +59,20 @@ export class LoginComponent {
       sessionStorage.setItem('token',data.token)
       this.servicioAuth.loginOn()
       this.visible=false
-      window.location.href="../inicio"
+      this.subscriptionPreferencia = this.servicioPreferencia.preferenciaGet(this.servicioAuth.getUid()).subscribe({
+        next: (data: Preferencia) => {
+          this.preferencia=data
+          try{
+
+            if(this.preferencia.idUsuario===this.servicioAuth.getUid()){
+              window.location.href="../inicio"
+            }
+          }catch(error){
+            window.location.href="../crearPreferencia"
+          }
+        }
+      })
+
     },
     error:(err)=>{
       this.logged.emit(false)

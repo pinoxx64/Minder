@@ -13,13 +13,13 @@
             <div class="persona">
             <img src="../../../assets/{{usuarioBuscado.foto}}"/>
                 <div class="like">
-                    <p-button icon="pi pi-heart" (click)="like()" [outlined]="true" />
+                    <p-button tipo="Like" icon="pi pi-heart" (click)="like()" [outlined]="true" />
                 </div>
                 <div class="nombre">
                     {{usuarioBuscado.nombre}}
                 </div>
                 <div class="dislike">
-                    <p-button icon="pi pi-arrow-right" (click)="dislike()"[outlined]="true" />
+                    <p-button tipo="Pasar" icon="pi pi-arrow-right" (click)="dislike()"[outlined]="true" />
                 </div>
             </div>
     </main>

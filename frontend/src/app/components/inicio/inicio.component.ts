@@ -1,3 +1,4 @@
+//aqui faltan detalles, como saber si ya le ha dado like y poner bien lo del interes
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { TableModule } from 'primeng/table';
@@ -15,6 +16,11 @@ import { PreferenciaService } from '../../service/preferencia.service';
 import { Preferencia } from '../../interface/preferencia';
 import { AuthService } from '../../service/auth.service';
 
+import { EventoComponent } from '../evento/evento.component';
+import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
+import { VistaEventoComponent } from '../vista-evento/vista-evento.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -25,7 +31,12 @@ import { AuthService } from '../../service/auth.service';
     ButtonModule, 
     CommonModule,
     DataViewModule,
-    CabeceraComponent
+    CabeceraComponent,
+    EventoComponent,
+    VerUsuarioComponent,
+    VistaEventoComponent,
+    RouterOutlet,
+    RouterLink,
   ],
   providers: [MessageService, UsuarioService],
   templateUrl: './inicio.component.html',
@@ -83,7 +94,8 @@ export class InicioComponent implements OnInit, OnDestroy {
         this.preferenciaUsuario.politico >= (this.preferencias[i].politico - 10) && this.preferenciaUsuario.politico <= (this.preferencias[i].politico + 10) &&
         this.preferenciaUsuario.idTipo == this.preferencias[i].idTipo &&
         this.preferenciaUsuario.idInteres == this.preferencias[i].idInteres &&
-        this.preferenciaUsuario.idNinos == this.preferencias[i].idNinos
+        this.preferenciaUsuario.idNinos == this.preferencias[i].idNinos &&
+        this.preferenciaUsuario.idUsuario != this.preferencias[i].idUsuario
       ) {
         this.usuariosInteresantes.push(this.preferencias[i].idUsuario);
       }
