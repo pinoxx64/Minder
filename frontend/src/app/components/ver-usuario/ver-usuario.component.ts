@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditableColumn, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -16,6 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { CabeceraComponent } from '../cabecera/cabecera.component';
 
 
 @Component({
@@ -30,7 +31,9 @@ import { MessageService } from 'primeng/api';
     InputTextModule,
     CrearUsuarioComponent,
     EditarUsuarioComponent,
-    CommonModule
+    CommonModule,
+    CabeceraComponent,
+    RouterOutlet
   ],
   templateUrl: './ver-usuario.component.html',
   styleUrl: './ver-usuario.component.css',

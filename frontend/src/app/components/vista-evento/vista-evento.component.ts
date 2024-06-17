@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditableColumn, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -13,6 +13,7 @@ import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserModule } from '@angular/platform-browser';
+import { CabeceraComponent } from '../cabecera/cabecera.component';
 
 @Component({
   selector: 'app-vista-evento',
@@ -24,7 +25,10 @@ import { BrowserModule } from '@angular/platform-browser';
     ButtonModule,
     CrearEventoComponent,
     ApuntarseComponent,
-    GoogleMapsModule
+    GoogleMapsModule,
+    CabeceraComponent,
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './vista-evento.component.html',
   styleUrl: './vista-evento.component.css',

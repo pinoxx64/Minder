@@ -16,6 +16,11 @@ import { PreferenciaService } from '../../service/preferencia.service';
 import { Preferencia } from '../../interface/preferencia';
 import { AuthService } from '../../service/auth.service';
 
+import { EventoComponent } from '../evento/evento.component';
+import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
+import { VistaEventoComponent } from '../vista-evento/vista-evento.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -26,7 +31,12 @@ import { AuthService } from '../../service/auth.service';
     ButtonModule, 
     CommonModule,
     DataViewModule,
-    CabeceraComponent
+    CabeceraComponent,
+    EventoComponent,
+    VerUsuarioComponent,
+    VistaEventoComponent,
+    RouterOutlet,
+    RouterLink,
   ],
   providers: [MessageService, UsuarioService],
   templateUrl: './inicio.component.html',
