@@ -1,10 +1,13 @@
-<div> <!--Esto van en headers-->
+<div>
     <img src="../assets/Minder_logo.png" width="15%"/>
-    <p-button type="button" styleClass="p-button-text" label="Amigos" [rounded]="true"/>
-    <p-button type="button" styleClass="p-button-text" label="Eventos" [rounded]="true"/>
-    <p-button type="button" styleClass="p-button-text" label="Inicio" [rounded]="true"/>
-    @if (servicioAuth.getRoles()=="admin") { 
-        <p-button type="button" styleClass="p-button-text" label="Usuarios" [rounded]="true"/>
-    }
+    <button routerLink="/evento">Evento</button>
+    <button routerLink="/eventoUsuario">Evento usuarios</button>
+    <button routerLink="/inicio">Inicio</button>
+    <!--@if (servicioAuth.getRoles()=="admin") { -->
+        <button routerLink="/usuario">Usuario</button>
+<!--}-->
+    <div class="prefil">
+        <app-perfil></app-perfil>
+    </div>
 </div>
  

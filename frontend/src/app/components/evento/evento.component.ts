@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditableColumn, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,7 @@ import { EditarEventoComponent } from '../editar-evento/editar-evento.component'
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
+import { CabeceraComponent } from '../cabecera/cabecera.component';
 
 @Component({
   selector: 'app-evento',
@@ -21,7 +22,9 @@ import { EventoService } from '../../service/evento.service';
     TableModule,
     ButtonModule,
     CrearEventoComponent,
-    EditarEventoComponent
+    EditarEventoComponent,
+    CabeceraComponent,
+    RouterOutlet
   ],
   templateUrl: './evento.component.html',
   styleUrl: './evento.component.css',
