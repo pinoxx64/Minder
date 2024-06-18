@@ -1,8 +1,8 @@
 require('dotenv').config()
 const { Sequelize, Op } = require('sequelize');
-const models = require('../models/index.js'); //Esto tiene acceso a todos los modelos.
+const models = require('../models/index.js');   
 
-class ConexionEvento {
+class ConexionUsuarioEvento {
 
     constructor() {
         this.db = new Sequelize(process.env.DB_DEV, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -88,7 +88,7 @@ class ConexionEvento {
         try{
             // const usuarioNuevo = new Persona(body); //Con esto añade los timeStamps.
             // await usuarioNuevo.save();
-            const usuarioNuevo = await models.Usuarioevento.create(body);
+            const usuarioNuevo = await models.usuarioevento.create(body);
             resultado = 1; // Asume que la inserción fue exitosa
         } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
@@ -132,4 +132,4 @@ class ConexionEvento {
     }
 }
 
-module.exports = ConexionEvento;
+module.exports = ConexionUsuarioEvento;

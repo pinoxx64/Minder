@@ -121,7 +121,7 @@ export class CrearUsuarioComponent {
               this.usuarios.contrasena= ''
               this.usuarios.genero= ''
               this.usuarios.foto= this.file.name
-              //window.location.reload()
+              window.location.reload()
             });
           },
           error: (error) => {

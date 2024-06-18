@@ -1,4 +1,4 @@
-//si no funciona probar con el subscription
+//se apunta mal la id del evento
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';       
@@ -7,11 +7,25 @@ import { UsuarioEventoService } from '../../service/usuarioEvento.service';
 import { UsuarioEvento } from '../../interface/usuarioEvento';
 import { AuthService } from '../../service/auth.service';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { VistaEventoComponent } from '../vista-evento/vista-evento.component';
+import { DialogModule } from 'primeng/dialog';
+import { Evento } from '../../interface/evento';
+import { EventoService } from '../../service/evento.service';
+import { FormGroup, FormsModule, FormControl } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-apuntarse',
   standalone: true,
-  imports: [ConfirmDialogModule,ToastModule, ConfirmComponent],
+  imports: [
+    ConfirmDialogModule,
+    ToastModule,
+    ConfirmComponent, 
+    VistaEventoComponent,
+    DialogModule,
+    FormsModule,
+    GoogleMapsModule
+  ],
   templateUrl: './apuntarse.component.html',
   styleUrl: './apuntarse.component.css',
   providers: [ConfirmationService, MessageService]
@@ -21,25 +35,65 @@ export class ApuntarseComponent {
     private confirmationService: ConfirmationService, 
     private messageService: MessageService, 
     private servicioUsuarioEvento: UsuarioEventoService,
-    private servicioAuth: AuthService
+    private servicioAuth: AuthService,
+    private servicioEvento: EventoService
   ) {}
   @Output() confirmacion = new EventEmitter<boolean>();
-  @Input() tipo=''
- @Input() color='success'
- @Input() mensaje='¿Desea apuntarse al evento?'
- mensajeLbl=this.mensaje
- @Input() icono=''
- iconoFinal='pi pi-'
+  @Output() cerrarModal = new EventEmitter<void>();
+  @Input() tipo= 0
+  @Input() idEvento!: number;
+
+  @Input() icono=''
+  iconoFinal='pi pi-'
+
+  @Input() evento?: any;
+  @Input() id!: number;
+  ev!: Evento;
+  eventForm!: FormGroup;
+  zoom: number = 12;
+
+  eventos: Evento = { 
+    id: 0, 
+    nombre: '', 
+    fecha: new Date(1900, 0, 1),
+    descrip: '', 
+    latitud: 0.0,
+    longitud: 0.0
+  };
+  
  usuarioEventos: UsuarioEvento = {
   id: 0,
-  idUsuario: 0,
-  idEvento: 0
+  idUsuario: this.servicioAuth.getUid(),
+  idEvento: 0//this.eventos.id
  }
- ngOnInit(): void {
 
-  this.mensajeLbl=this.mensaje
-  this.iconoFinal=this.iconoFinal+this.icono
+
+latitude: number = this.eventos.latitud;
+longitude: number = this.eventos.longitud;
+ @Input() visible: boolean = false;
+
+ ngOnInit(): void {
+  this.usuarioEventos.idEvento = this.idEvento!;
+  
+  this.eventForm = new FormGroup({
+    nombre: new FormControl(this.eventos.nombre),
+    fecha: new FormControl(this.eventos.fecha),
+    descrip: new FormControl(this.eventos.descrip),
+    latitude: new FormControl(this.latitude),
+    longitude: new FormControl(this.longitude)
+  });
  }
+
+ onMapClick(event: google.maps.MapMouseEvent) {
+  if (event.latLng) {
+    this.latitude = event.latLng.lat();
+    this.longitude = event.latLng.lng();
+    this.eventForm.patchValue({
+      latitude: this.latitude,
+      longitude: this.longitude
+    });
+  }
+}
 
  unirse(b: Boolean){
   this.messageService.add({ severity: 'info', summary: 'Crear evento', detail: 'En curso', life: 3000 });
@@ -48,16 +102,47 @@ export class ApuntarseComponent {
     next: (data: any) => {
       setTimeout(() => {
         this.messageService.add({ severity: 'success', summary: 'Crear evento', detail: 'Completado', life: 3000 });
-        this.usuarioEventos.id = data.id;
-        this.usuarioEventos.idUsuario = this.servicioAuth.getUid()
-        this.usuarioEventos.idEvento = 0
-        window.location.reload();
+        for (let i = 0; i < this.evento.length; i++) {
+          console.log(this.evento[i].id)
+          console.log(this.eventos.id)
+          if (this.evento[i].id == this.eventos.id) {
+            this.usuarioEventos.id = data.id;
+            this.usuarioEventos.idEvento = this.id
+            this.usuarioEventos.idUsuario = this.servicioAuth.getUid()
+            this.visible= false
+            window.location.reload();
+          }
+        }
       });
     },
     error: (error) => {
       this.messageService.add({ severity: 'error', summary: 'Crear evento', detail: 'Ha surgido un error al crear el evento, inténtelo de nuevo', life: 3000 });
     }
-  });
-}
- }
+    });
+  }
+  showDialog(){
+    this.servicioEvento.eventoGet(this.id!).subscribe({
+      next: (eve: Evento) => {
+        this.ev = eve;
+        this.visible = true;
+        this.eventos = { ...eve };
+        this.latitude = eve.latitud;
+        this.longitude = eve.longitud;
+        this.eventForm.patchValue({
+          nombre: this.eventos.nombre,
+          fecha: this.eventos.fecha,
+          descrip: this.eventos.descrip,
+          latitude: this.latitude,
+          longitude: this.longitude
+        });
+      },
+      error: (e) => {
+        this.messageService.add({ severity: 'error', summary: 'Cargar evento', detail: 'Error al cargar el evento', life: 3000 });
+      }
+    });
+  }
 
+  cerrar(): void {
+    this.cerrarModal.emit();
+  }
+}
