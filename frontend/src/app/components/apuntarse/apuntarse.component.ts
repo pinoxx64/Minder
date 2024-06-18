@@ -194,7 +194,7 @@ export class ApuntarseComponent implements OnInit {
     private servicioAuth: AuthService
   ) { }
 
-  @Input() eventId!: string;
+  @Input() eventId!: number;
   zoom: number = 12;
   ev!: Evento;
   eventos: Evento = { 
@@ -218,7 +218,7 @@ export class ApuntarseComponent implements OnInit {
 
   usuarioEventos: UsuarioEvento = {
     id: 0,
-    idEvento: this.id,
+    idEvento: this.eventId,
     idUsuario: this.servicioAuth.getUid()
   }
 
@@ -251,6 +251,7 @@ export class ApuntarseComponent implements OnInit {
 
   async unirse(b: Boolean) {
     if (b) {
+      this.usuarioEventos.idEvento = this.eventId;
       this.eventos.latitud = this.latitude;
       this.eventos.longitud = this.longitude;
 
@@ -261,8 +262,8 @@ export class ApuntarseComponent implements OnInit {
             for (let i = 0; i < this.evento.length; i++) {
               if (this.evento[i].id == this.eventos.id) {
                 this.usuarioEventos.id = data.id;
-                this.usuarioEventos.idEvento = this.evento[i].id
-                this.usuarioEventos.idUsuario = this.servicioAuth.getUid()
+                //this.usuarioEventos.idEvento = this.eventId
+                //this.usuarioEventos.idUsuario = this.servicioAuth.getUid()
                 this.visible = false;
               }
             }
