@@ -13,21 +13,14 @@
 
             <div class="flex flex-column">
                 <label for="eventname1">Nombre</label><br>
-                <input pInputText id="nombre" aria-describedby="eventname-help1" [(ngModel)]="eventos.nombre" />
-            </div>
-
-            <br>
-
-            <div class="flex flex-column">
-                <label for="eventname3">Fecha del evento</label><br>
-                <p-calendar id="fecha" [(ngModel)]="eventos.fecha"></p-calendar>
+                <input pInputText id="nombre" aria-describedby="eventname-help1" [(ngModel)]="eventos.nombre" readonly/>
             </div>
 
             <br>
 
             <div class="flex flex-column">
                 <label for="eventname4">Descripción</label><br>
-                <input pInputText id="descrip" aria-describedby="eventname-help4" [(ngModel)]="eventos.descrip" />
+                <input pInputText id="descrip" aria-describedby="eventname-help4" [(ngModel)]="eventos.descrip" readonly/>
             </div>
             
             <br>

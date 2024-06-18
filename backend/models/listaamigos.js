@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.usuario, {
+      /*.belongsTo(models.usuario, {
         foreignKey: 'idUsuario1',
         as: 'usuarios'
       });
       this.belongsTo(models.usuario, {
         foreignKey: 'idUsuario2',
         as: 'usuarios'
-      });
+      });*/
     }
   }
   listaAmigos.init({
