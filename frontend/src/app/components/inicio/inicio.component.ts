@@ -1,4 +1,3 @@
-//aqui faltan detalles, como saber si ya le ha dado like y poner bien lo del interes
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { TableModule } from 'primeng/table';

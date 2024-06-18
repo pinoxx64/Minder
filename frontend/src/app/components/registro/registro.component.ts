@@ -55,8 +55,6 @@ export class RegistroComponent implements OnInit{
 
   formGroup: FormGroup | undefined;
 
-  //--------------------------------------------------------------------------------------
-
   showDialog() {
     this.visible = true;
   }

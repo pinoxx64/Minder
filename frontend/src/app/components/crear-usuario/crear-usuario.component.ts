@@ -51,19 +51,11 @@ export class CrearUsuarioComponent {
     foto: ''
   }
 
-
   @Input() usuario?: any
   @Input() tipo=0
   @Input() visible: boolean = false;
-  //maxDate = new Date().toLocaleDateString();
 
   @Output() cerrarModal = new EventEmitter<void>();
-
-  numArte: number = 50;
-  numDeporte: number = 50;
-  numPolitico: number = 50;
-
-  //idUsu!: number
 
   formGroup: FormGroup | undefined;
   
@@ -71,8 +63,6 @@ export class CrearUsuarioComponent {
   fotoPreview: string | null = null
 
   file: any
-
-  //--------------------------------------------------------------------------------------
 
   showDialog() {
     this.visible = true;
