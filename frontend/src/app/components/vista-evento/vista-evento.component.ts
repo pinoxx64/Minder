@@ -49,6 +49,7 @@ export class VistaEventoComponent {
   zoom = 6;
   display: any;
   @Input() admin=true
+  
 
   ngOnInit(): void{
     this.subscriptionUsers = this.servicioEvento.eventosGet().subscribe({

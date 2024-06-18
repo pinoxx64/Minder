@@ -33,18 +33,12 @@ const usuariosPost =  async(req = request, res = response) => {
     const conx = new Conexion();
 
     try {
-        // Hashear la contraseña antes de guardarla
-        const hashedPassword = await bcrypt.hash(req.body.Clave, 10); // 10 es el costo de la función de hash
-        
-        // Modificar el cuerpo de la solicitud para incluir la contraseña hasheada
+        const hashedPassword = await bcrypt.hash(req.body.Clave, 10);
         const usuarioData = {
             ...req.body,
             Clave: hashedPassword
         };
-
-        // Guardar el usuario
         const msg = await conx.registrarUsuario(usuarioData);
-        
         console.log('Insertado correctamente!');
         res.status(201).json(msg);
     } catch (err) {

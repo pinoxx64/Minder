@@ -24,7 +24,7 @@
         </ng-template> 
         <ng-template pTemplate="body" let-eventos>
             <tr class="glass">
-                <td><app-apuntarse></app-apuntarse></td>
+                <td><app-apuntarse [evento]="listaEvento" [id]="eventos.id"></app-apuntarse></td>
                 <td>{{eventos.nombre}}</td>
                 <td>{{eventos.fecha}}</td>
                 <td>{{eventos.descrip}}</td>

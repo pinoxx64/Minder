@@ -13,7 +13,7 @@ import { VistaEventoComponent } from './components/vista-evento/vista-evento.com
 import { CrearPreferenciaComponent } from './components/crear-preferencia/crear-preferencia.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+    {path: '', redirectTo: '/presentacion', pathMatch: 'full'},
     {path: 'presentacion', component:HomeComponent},
     {path: 'inicio', component:InicioComponent},
     {path: 'evento', component:EventoComponent},

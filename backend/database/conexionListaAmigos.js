@@ -1,5 +1,5 @@
 const { where } = require('sequelize')
-const listaAmigo = require('../models/listaAmigos')
+const listaAmigo = require('../models/listaamigos')
 
 class conexionListaAmigos {
     static obtenerListaAmigos = async () => {
@@ -32,44 +32,19 @@ class conexionListaAmigos {
         return resultado;
     }
 
-    static obtenerListaAmigoPorId = async (idlistaAmgos1) => {
+    static obtenerListaAmigoPorIdUsuario1 = async (idUsuario1) => {
         try {
             const listaAmigo = await listaAmigo.findAll({
                 where: {
-                    idlistaAmgos1 : idlistaAmgos1
+                    idUsuario1 : idUsuario1
                 },
-                attributes: ['id', 'idlistaAmgos1', 'idlistaAmgos2']
+                attributes: ['id', 'idUsuario1', 'idUsuario2']
             });
             return listaAmigo;
         } catch (error) {
             throw error;
         }
     }
-
-    static modificarListaAmigo = async (idlistaAmgos1, body) => {
-        let resultado = 0
-        try {
-            const listaAmigo = await listaAmigo.findById({
-                where: {
-                    idlistaAmgos1 : idlistaAmgos1
-                },
-                attributes: ['id', 'idlistaAmgos1', 'idlistaAmgos2']
-            });
-    
-            if (!listaAmigo) {
-                resultado = 0
-            } else {
-                await listaAmigo.updateOne(body)
-                resultado = 1
-            }
-    
-        } catch (error) {
-            resultado = 0
-            console.error('Error al modificar listaAmigo:', error)
-        }
-        return resultado
-    }
-
 }
 
 module.exports = conexionListaAmigos
