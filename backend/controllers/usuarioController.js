@@ -29,19 +29,22 @@ const usuarioGet =  (req, res = response) => {
         });
 }
 
-const usuariosPost =  (req = request, res = response) => {
+const usuariosPost =  async(req = request, res = response) => {
     const conx = new Conexion();
-    
-    //conx.registrarUsuario(req.body.DNI, req.body.Nombre, req.body.Clave, req.body.Tfno)    
-    conx.registrarUsuario(req.body)    
-        .then( msg => {
-            console.log('Insertado correctamente!');
-            res.status(201).json(msg);
-        })
-        .catch( err => {
-            console.log('Fallo en el registro!');
-            res.status(203).json(err);
-        });
+
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.Clave, 10);
+        const usuarioData = {
+            ...req.body,
+            Clave: hashedPassword
+        };
+        const msg = await conx.registrarUsuario(usuarioData);
+        console.log('Insertado correctamente!');
+        res.status(201).json(msg);
+    } catch (err) {
+        console.log('Fallo en el registro!');
+        res.status(203).json(err);
+    }
 }
 
 const usuariosDelete =  (req, res = response) => {
@@ -58,7 +61,7 @@ const usuariosDelete =  (req, res = response) => {
         });
 }
 
-const usuariosPut =  (req, res = response) => {
+const usuariosPut =  async(req, res = response) => {
     const conx = new Conexion();
     
     conx.modificarUsuario(req.params.id, req.body)    

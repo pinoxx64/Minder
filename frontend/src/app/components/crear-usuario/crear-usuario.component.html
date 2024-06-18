@@ -1,4 +1,4 @@
-<p-toast></p-toast><!--Queda lo de los slider-->
+<p-toast></p-toast>
 
 <div class="card flex justify-content-center">
     @if (tipo==0) {
@@ -22,7 +22,7 @@
 
             <div class="flex flex-column">
                 <label for="fecha">Fecha de Nacimiento</label>
-                <p-calendar id="fecha" placeholder="DD/MM/YYYY" aria-describedby="eventname-help2"  [(ngModel)]="usuarios.fechaNacimiento"/>
+                <input type="date" id="fecha" placeholder="DD/MM/YYYY" aria-describedby="eventname-help2"  [(ngModel)]="usuarios.fechaNacimiento"/>
             </div>
 
             <div class="flex flex-column">
@@ -35,30 +35,9 @@
                 <input pInputText id="genero" aria-describedby="genero" [(ngModel)]="usuarios.genero"/>
             </div>
 
-            <div class="flex flex-column"><!--Esto hay que cambiarlo para que sea con un boton de subir fotos-->
+            <div class="flex flex-column">
                 <label for="foto">Foto</label>
                 <input pInputText id="foto" aria-describedby="foto" [(ngModel)]="usuarios.foto"/>
-                <!--<label for="fotoCartel">Foto de cartel</label><br><br>
-                    <input #archivo type="file" id="archivo" class="form-control" accept="image/*" (change)="uplodadFoto($event)" ><br>
-                    @if(fotoPreview){
-                        <p-button (onClick)="limpiarFoto(archivo)">Limpiar</p-button>
-                    }
-                <small id="fotoCartel">Sube la foto del cartel del nuevo evento</small><br>-->
-            </div>
-
-            <div class="flex flex-column"><!--Cambiar estos 3-->
-                <input id="arte" type="text" pInputText [(ngModel)]="numArte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numArte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <input id="deporte" type="text" pInputText [(ngModel)]="numDeporte" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numDeporte" class="w-full" />
-            </div>
-
-            <div class="flex flex-column">
-                <input id="politica" type="text" pInputText [(ngModel)]="numPolitico" class="w-full mb-3"/>
-                <p-slider [(ngModel)]="numPolitico" class="w-full" />
             </div>
         </div>
         <div style="margin-top: 20px;" >

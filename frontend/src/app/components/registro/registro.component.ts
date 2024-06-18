@@ -10,10 +10,6 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 
 import { Usuario } from '../../interface/usuario';
 import { UsuarioService } from '../../service/usuario.service';
-import { Preferencia } from '../../interface/preferencia';
-import { PreferenciaService } from '../../service/preferencia.service';
-import { Nino } from '../../interface/nino';
-import { NinoService } from '../../service/nino.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,15 +29,13 @@ import { Subscription } from 'rxjs';
   styleUrl: './registro.component.css',
   providers:[
     UsuarioService,
-    MessageService,
-    NinoService
+    MessageService
   ]
 })
 export class RegistroComponent implements OnInit{
   constructor(
     public messageService: MessageService,
-    private servicioUsuario: UsuarioService,
-    private servicioNino: NinoService
+    private servicioUsuario: UsuarioService
   ){}
   usuarios: Usuario = { 
     id: 0, 
@@ -59,17 +53,7 @@ export class RegistroComponent implements OnInit{
 
   @Output() cerrarModal = new EventEmitter<void>();
 
-  numArte: number = 50;
-  numDeporte: number = 50;
-  numPolitico: number = 50;
-
-  ninos: Nino[] | undefined
-  ninoSeleccionado: Nino | undefined
-  subscriptionNino: Subscription=new Subscription
-
   formGroup: FormGroup | undefined;
-
-  //--------------------------------------------------------------------------------------
 
   showDialog() {
     this.visible = true;
@@ -83,16 +67,6 @@ export class RegistroComponent implements OnInit{
       this.formGroup = new FormGroup({
           date: new FormControl<Date | null>(null)
       });
-      /*this.ninos = [
-        this.subscriptionNino = this.servicioNino.usuariosGet().subscribe({
-          next: (data: Array<Usuario>) => {
-            this.listaNino=data
-          },
-          error: (e) => {
-    
-          }
-        })
-      ]*/
   }
 
   crear(b:Boolean){

@@ -7,10 +7,12 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/api';
 import { ConfirmComponent } from '../confirm/confirm.component';
-//import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { Evento } from '../../interface/evento';
 import { EventoService } from '../../service/evento.service';
+import { GoogleMap } from '@angular/google-maps';
+
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
@@ -22,21 +24,22 @@ import { EventoService } from '../../service/evento.service';
     ReactiveFormsModule, 
     CalendarModule,
     FormsModule,
-    ConfirmComponent
+    ConfirmComponent,
+    GoogleMapsModule
   ],
   templateUrl: './crear-evento.component.html',
-  styleUrl: './crear-evento.component.css',
-  providers:[
+  styleUrls: ['./crear-evento.component.css'],
+  providers: [
     EventoService,
     MessageService
   ]
-
 })
-export class CrearEventoComponent {
+export class CrearEventoComponent implements OnInit {
   constructor(
     public messageService: MessageService,
     private servicioEvento: EventoService
   ){}
+
   eventos: Evento = { 
     id: 0, 
     nombre: '', 
@@ -46,17 +49,18 @@ export class CrearEventoComponent {
     longitud: 0.0
   }
 
-  @Input() evento?: any
-  @Input() tipo=0
+  @Input() evento?: any;
+  @Input() tipo = 0;
   @Input() visible: boolean = false;
 
   @Output() cerrarModal = new EventEmitter<void>();
 
   formGroup: FormGroup | undefined;
 
-
-
-  //--------------------------------------------------------------------------------------
+  eventForm!: FormGroup;
+  latitude: number = this.eventos.latitud;
+  longitude: number = this.eventos.longitud; 
+  zoom: number = 12;
 
   showDialog() {
     this.visible = true;
@@ -67,33 +71,50 @@ export class CrearEventoComponent {
   }
 
   ngOnInit() {
-      this.formGroup = new FormGroup({
-          date: new FormControl<Date | null>(null)
-      });
+    this.eventForm = new FormGroup({
+      nombre: new FormControl(this.eventos.nombre),
+      fecha: new FormControl(this.eventos.fecha),
+      descrip: new FormControl(this.eventos.descrip),
+      latitude: new FormControl(this.latitude),
+      longitude: new FormControl(this.longitude)
+    });
   }
 
-  crear(b:Boolean){
-    if (b){
-        this.messageService.add({ severity: 'info', summary:'Crear evento', detail:'En curso', life:3000});
-  
-        this.servicioEvento.eventosPost(this.eventos).subscribe({
-          next: (data: any) => {
-       
-            setTimeout(() => {
-              this.messageService.add({severity: 'success', summary:'Crear evento', detail:'Completado', life:3000});
-              this.eventos.id = data.id
-              this.eventos.nombre= ''
-              this.eventos.fecha= new Date(1900, 0, 1)
-              this.eventos.descrip= ''
-              this.eventos.latitud= 0.0
-              this.eventos.longitud= 0.0
-              window.location.reload() 
-            });
-          },
-          /*error: (error) => {
-            this.messageService.add({severity: 'error', summary:'Crear evento', detail:'Ha surguido un error al crear el evento, inténtelo de nuevo', life:3000});
-          }*/
-        });
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      this.latitude = event.latLng.lat();
+      this.longitude = event.latLng.lng();
+      this.eventForm.patchValue({
+        latitude: this.latitude,
+        longitude: this.longitude
+      });
+    }
+  }
+
+  crear(b: Boolean) {
+    if (b) {
+      this.messageService.add({ severity: 'info', summary: 'Crear evento', detail: 'En curso', life: 3000 });
+
+      this.eventos.latitud = this.latitude;
+      this.eventos.longitud = this.longitude;
+
+      this.servicioEvento.eventosPost(this.eventos).subscribe({
+        next: (data: any) => {
+          setTimeout(() => {
+            this.messageService.add({ severity: 'success', summary: 'Crear evento', detail: 'Completado', life: 3000 });
+            this.eventos.id = data.id;
+            this.eventos.nombre = '';
+            this.eventos.fecha = new Date(1900, 0, 1);
+            this.eventos.descrip = '';
+            this.eventos.latitud = 0.0;
+            this.eventos.longitud = 0.0;
+            window.location.reload();
+          });
+        },
+        error: (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Crear evento', detail: 'Ha surgido un error al crear el evento, inténtelo de nuevo', life: 3000 });
+        }
+      });
     }
   }
 }

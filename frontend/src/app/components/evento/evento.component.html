@@ -1,3 +1,6 @@
+<header>
+    <app-cabecera></app-cabecera>
+</header>
 <div style="margin-top: 40px;" class="card">
     <p-table
         [value]="listaEvento"
@@ -24,7 +27,9 @@
                 <td>{{eventos.nombre}}</td>
                 <td>{{eventos.fecha}}</td>
                 <td>{{eventos.descrip}}</td>
-                <!--Poner aqui el mapa-->
+                <td>Latitud:{{eventos.latitud}}
+                    Longitud:{{eventos.longitud}}
+                </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">

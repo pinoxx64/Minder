@@ -1,4 +1,4 @@
-<p-toast></p-toast><!--Queda lo de los slider-->
+<p-toast></p-toast>
 
 <div class="card flex justify-content-center">
     @if (tipo==0) {
@@ -19,19 +19,27 @@
 
             <div class="flex flex-column">
                 <label for="fecha">Fecha del evento</label><br>
-                <p-calendar id="fecha" placeholder="MM/DD/YYYY" aria-describedby="eventname-help2" [(ngModel)]="eventos.fecha"/>
+                <input type="date" id="fecha" placeholder="MM/DD/YYYY" aria-describedby="eventname-help2" [(ngModel)]="eventos.fecha"/>
             </div>
 
             <br>
 
             <div class="flex flex-column">
-                <label for="descrip">descrip</label><br>
+                <label for="descrip">Descripción</label><br>
                 <input pInputText id="descrip" aria-describedby="eventname-help3" [(ngModel)]="eventos.descrip"/>
             </div>
 
             <br>
 
-            <!--Falta añadir el mapa-->
+            <div class="flex flex-column">
+                <label for="lugar">Lugar</label><br>
+                <google-map height="400px" width="100%"
+                    [center]="{ lat: latitude, lng: longitude }"
+                    [zoom]="zoom"
+                    (mapClick)="onMapClick($event)">
+                    <map-marker [position]="{ lat: latitude, lng: longitude }"></map-marker>
+                </google-map>
+            </div>
 
         </div>
         <div style="margin-top: 20px;" >

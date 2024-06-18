@@ -10,7 +10,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Usuario } from '../../interface/usuario';

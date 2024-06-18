@@ -34,10 +34,6 @@ export class AuthService  {
   let body={correo:correo,contrasena:contrasena}
   return this.http.put<any>(this.baseUrl+environment.urlLogin,body)
 }
-registro(usuario:Usuario): Observable<any | undefined> {
-  let body={nombre:usuario.nombre,contrasena:usuario.contrasena,correo:usuario.correo}
-  return this.http.post<any>(this.baseUrl+environment.urlRegistro,body)
-}
 
   hasRol(rol:Array<String>):boolean{
   

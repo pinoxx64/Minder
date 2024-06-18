@@ -11,6 +11,14 @@ export class PreferenciaService{
     baseUrl = environment.baseUrl+environment.urlPreferencia
     constructor(private http:HttpClient){}
 
+    preferenciasGet(): Observable<any  | undefined> {
+      return this.http.get<any>(this.baseUrl).pipe(
+        catchError((error) =>{
+          return of(undefined)
+        })
+      )
+    }
+
       preferenciaGet(id:number): Observable<any | undefined> {
     
         return this.http.get<any>(this.baseUrl+'/'+id).pipe(
