@@ -218,7 +218,7 @@ export class ApuntarseComponent implements OnInit {
 
   usuarioEventos: UsuarioEvento = {
     id: 0,
-    idEvento: this.eventId,
+    idEvento: this.id,
     idUsuario: this.servicioAuth.getUid()
   }
 
